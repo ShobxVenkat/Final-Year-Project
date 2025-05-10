@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const FloatingParciles = ({
   count = 15,
-  colors = ['#00FFFF', '#FF69B4', '#7B68EE', '#FF4500'],
+  colors = ['#FF8C00', '#FFA500', '#D3D3D3'],
   minSize = 4,
   maxSize = 10,
   minSpeed = 0.02,
