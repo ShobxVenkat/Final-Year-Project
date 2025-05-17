@@ -47,11 +47,12 @@ const Home = () => {
     <div className="relative h-[calc(100vh-64px)] bg-[#0E0F1B] text-white overflow-hidden flex flex-col">
       {/* Background effects */}
       <div className="absolute inset-0 z-0 pointer-events-none">
-        <div className="absolute top-12 left-8 w-10 h-10 bg-orange-400 rounded-full blur-md opacity-70 animate-pulse" />
-        <div className="absolute top-20 right-24 w-6 h-6 bg-orange-300 rounded-full blur-sm opacity-60 animate-pulse" />
+        <div className="absolute top-12 left-8 w-10 h-10 bg-orange-400 rounded-full blur-md opacity-40 animate-pulse" />
+        <div className="absolute top-20 right-24 w-6 h-6 bg-orange-300 rounded-full blur-sm opacity-50 animate-pulse" />
         <div className="absolute bottom-16 left-[30%] w-24 h-24 bg-orange-200 rounded-full blur-2xl opacity-40 animate-pulse" />
         <div className="absolute top-[50%] right-[20%] w-16 h-16 bg-orange-500 rounded-full blur-xl opacity-50 animate-pulse" />
 
+        <div className="hidden md:block">
         {Array.from({ length: 40 }).map((_, i) => (
           <div
             key={i}
@@ -62,11 +63,12 @@ const Home = () => {
             }}
           />
         ))}
+        </div>
       </div>
 
       {/* Main content */}
       <motion.div
-        className="relative z-10 container mx-auto px-4 py-6 flex-grow flex flex-col md:flex-row items-center justify-between"
+        className="relative z-10 container mx-auto px-4 py-6 flex-grow flex flex-col md:flex-row items-center justify-around"
         initial="hidden"
         animate="show"
         variants={container}
@@ -101,7 +103,7 @@ const Home = () => {
           </motion.div>
 
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start"
+            className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start sm:justify-center items-center"
             variants={item}
           >
             <Button
@@ -114,7 +116,7 @@ const Home = () => {
                 fontWeight: "bold",
                 borderRadius: 2,
                 textTransform: "none",
-                width: { xs: "100%", sm: "auto" },
+                width: { xs: "50%", sm: "auto" },
               }}
             >
               Explore Auctions
@@ -130,7 +132,7 @@ const Home = () => {
                 fontWeight: "bold",
                 borderRadius: 2,
                 textTransform: "none",
-                width: { xs: "100%", sm: "auto" },
+                width: { xs: "50%", sm: "auto" },
               }}
             >
               How It Works
@@ -165,7 +167,7 @@ const Home = () => {
               className="relative"
             >
               <div className="w-64 h-64 rounded-3xl bg-gray-800/70 border border-gray-700/50 backdrop-blur-sm shadow-2xl flex flex-col items-center justify-center p-6 relative overflow-hidden">
-                <div className="w-32 h-32 bg-gradient-to-br from-green-400/20 to-blue-500/20 rounded-xl mb-4 flex items-center justify-center">
+                <div className="w-32 h-32 bg-gradient-to-br from-green-400/20 to-blue-500/20 rounded-xl mb-4 flex items-center justify-center ">
                   <svg
                     className="w-16 h-16 text-gray-400"
                     fill="none"

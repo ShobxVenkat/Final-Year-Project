@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const MobileMenu = ({ isOpen, navItems, onClose }) => {
   const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
@@ -10,6 +10,18 @@ const MobileMenu = ({ isOpen, navItems, onClose }) => {
   const toggleDropdown = (index) => {
     setOpenDropdownIndex(openDropdownIndex === index ? null : index);
   };
+
+  // if the mobile menu is open and and screen width is lg so this useeffect closes the menu 
+   useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024 && isOpen) {
+        onClose();
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
