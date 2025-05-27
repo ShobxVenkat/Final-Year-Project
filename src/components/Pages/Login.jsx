@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import loginIllustration from "../../assets/laptopbag.png";
 import {
   Box,
   Button,
-  Grid,
   TextField,
   Typography,
   Link as MuiLink,
@@ -12,6 +11,8 @@ import {
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  const [isRegister, setIsRegister] = useState(false);
+
   return (
     <Box
       sx={{
@@ -33,26 +34,55 @@ const Login = () => {
           borderRadius: 4,
           overflow: "hidden",
           backgroundImage: "linear-gradient(to bottom right, #282745, #282644)",
+          position: "relative",
         }}
       >
-        {/* Left: Form */}
-        <Box sx={{ width: { xs: "100%", md: "50%" }, p: 4 }}>
+        {/* Animated background block */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: isRegister ? 0 : "50%",
+            width: "50%",
+            height: "100%",
+            background: "linear-gradient(135deg, orange 0%, #f97316 100%)",
+            borderRadius: "0 0 0 0",
+            transition: "left 0.6s ease",
+            zIndex: 1,
+          }}
+        />
+
+        {/* Form Box */}
+        <Box
+          sx={{
+            width: { xs: "100%", md: "50%" },
+            p: 4,
+            color: "white",
+            position: "relative",
+            zIndex: 2,
+            transition: "transform 0.6s ease",
+            transform: isRegister ? "translateX(100%)" : "translateX(0)",
+            // To ensure text is readable on colored bg, transparent bg added
+            backgroundColor: isRegister ? "transparent" : "rgba(0,0,0,0.2)",
+            borderRadius: "0 20px 20px 0",
+          }}
+        >
           <Typography variant="h4" fontWeight={700} color="white">
             BidFlare
           </Typography>
-          <Typography
-            variant="h5"
-            fontWeight={600}
-            color="white"
-            sx={{ mt: 4 }}
-          >
-            Welcome Back
+          <Typography variant="h5" fontWeight={600} sx={{ mt: 4 }}>
+            {isRegister ? "Create Account" : "Welcome Back"}
           </Typography>
           <Typography variant="body2" color="gray" sx={{ mb: 4 }}>
-            Access your account
+            {isRegister ? "Register your account" : "Access your account"}
           </Typography>
 
-          <Box component="form" noValidate autoComplete="off">
+          <Box
+            component="form"
+            noValidate
+            autoComplete="off"
+            onSubmit={(e) => e.preventDefault()}
+          >
             <TextField
               label="Email"
               type="email"
@@ -63,10 +93,10 @@ const Login = () => {
               sx={{
                 input: { color: "white" },
                 label: { color: "white" },
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': { borderColor: "#3A3E5A" },
-                  '&:hover fieldset': { borderColor: "orange" },
-                  '&.Mui-focused fieldset': { borderColor: "orange" },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": { borderColor: "#3A3E5A" },
+                  "&:hover fieldset": { borderColor: "orange" },
+                  "&.Mui-focused fieldset": { borderColor: "orange" },
                   backgroundColor: "#2A2D45",
                 },
               }}
@@ -82,26 +112,49 @@ const Login = () => {
               sx={{
                 input: { color: "white" },
                 label: { color: "white" },
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': { borderColor: "#3A3E5A" },
-                  '&:hover fieldset': { borderColor: "orange" },
-                  '&.Mui-focused fieldset': { borderColor: "orange" },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": { borderColor: "#3A3E5A" },
+                  "&:hover fieldset": { borderColor: "orange" },
+                  "&.Mui-focused fieldset": { borderColor: "orange" },
                   backgroundColor: "#2A2D45",
                 },
               }}
             />
 
-            <Box textAlign="right" mt={1}>
-              <MuiLink
-                component={Link}
-                to="/forgot-password"
-                underline="hover"
-                color="warning.main"
-                variant="body2"
-              >
-                Forgot password?
-              </MuiLink>
-            </Box>
+            {isRegister && (
+              <TextField
+                label="Username"
+                type="text"
+                fullWidth
+                variant="outlined"
+                margin="normal"
+                placeholder="Your username"
+                sx={{
+                  input: { color: "white" },
+                  label: { color: "white" },
+                  "& .MuiOutlinedInput-root": {
+                    "& fieldset": { borderColor: "#3A3E5A" },
+                    "&:hover fieldset": { borderColor: "orange" },
+                    "&.Mui-focused fieldset": { borderColor: "orange" },
+                    backgroundColor: "#2A2D45",
+                  },
+                }}
+              />
+            )}
+
+            {!isRegister && (
+              <Box textAlign="right" mt={1}>
+                <MuiLink
+                  component={Link}
+                  to="/forgot-password"
+                  underline="hover"
+                  color="warning.main"
+                  variant="body2"
+                >
+                  Forgot password?
+                </MuiLink>
+              </Box>
+            )}
 
             <Button
               fullWidth
@@ -110,23 +163,46 @@ const Login = () => {
                 mt: 3,
                 py: 1.5,
                 backgroundColor: "orange",
-                '&:hover': { backgroundColor: "darkorange" },
+                "&:hover": { backgroundColor: "darkorange" },
               }}
               type="submit"
             >
-              Sign In
+              {isRegister ? "Register" : "Sign In"}
             </Button>
 
             <Typography variant="body2" color="gray" mt={4} textAlign="center">
-              Don't have an account?{' '}
-              <MuiLink component={Link} to="/register" underline="hover" color="white">
-                Register
-              </MuiLink>
+              {isRegister ? (
+                <>
+                  Already have an account?{" "}
+                  <MuiLink
+                    component="button"
+                    onClick={() => setIsRegister(false)}
+                    underline="hover"
+                    color="white"
+                    sx={{ cursor: "pointer" }}
+                  >
+                    Login
+                  </MuiLink>
+                </>
+              ) : (
+                <>
+                  Don't have an account?{" "}
+                  <MuiLink
+                    component="button"
+                    onClick={() => setIsRegister(true)}
+                    underline="hover"
+                    color="white"
+                    sx={{ cursor: "pointer" }}
+                  >
+                    Register
+                  </MuiLink>
+                </>
+              )}
             </Typography>
           </Box>
         </Box>
 
-        {/* Right: Image with Decorative Circles */}
+        {/* Image Box */}
         <Box
           sx={{
             width: { xs: "100%", md: "50%" },
@@ -137,11 +213,9 @@ const Login = () => {
             justifyContent: "center",
             p: 3,
             overflow: "hidden",
-            "@keyframes floatUpDown": {
-              "0%": { transform: "translateY(0)" },
-              "50%": { transform: "translateY(-10px)" },
-              "100%": { transform: "translateY(0)" },
-            },
+            transition: "transform 0.6s ease",
+            transform: isRegister ? "translateX(-100%)" : "translateX(0)",
+            zIndex: 2,
           }}
         >
           {/* Decorative Circles */}
@@ -169,7 +243,6 @@ const Login = () => {
             />
           ))}
 
-          {/* Main Illustration */}
           <img
             src={loginIllustration}
             alt="Login Illustration"
