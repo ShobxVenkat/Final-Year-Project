@@ -11,7 +11,7 @@ export default function App() {
   return (
     <Router>
       <Navbar /> 
-      <FloatingParciles/>
+      {/* <FloatingParciles/> */}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auctions" element={<Auctions/>}/>
