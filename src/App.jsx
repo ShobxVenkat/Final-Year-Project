@@ -6,6 +6,7 @@ import Login from "./components/Pages/Login";
 import Navbar from "./components/Layouts/Header/Navbar";
 import FloatingParciles from "./components/Extra/FloatingParciles";
 import Auctions from "./components/Pages/Auctions";
+import Shop from "./components/Pages/Shop";
 
 export default function App() {
   return (
@@ -17,6 +18,9 @@ export default function App() {
         <Route path="/auctions" element={<Auctions/>}/>
         
         <Route path="/login" element={<Login />} />
+        <Route path="/shop" element={<Shop />} />
+        
+
         
       </Routes>
     </Router>

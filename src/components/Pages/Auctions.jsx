@@ -172,11 +172,11 @@ const Auctions = () => {
                 Live Auctions
               </h2>
               <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-amber-500/30 to-orange-500/30 rounded-full"></div>
-            </motion.div>
-            <motion.div variants={item}>
-              <Button
-                endIcon={<FiArrowRight className="text-amber-400" />}
-                sx={{
+                </motion.div>
+                 <motion.div variants={item}>
+                  <Button
+                  endIcon={<FiArrowRight className="text-amber-400" />}
+                 sx={{
                   color: "white",
                   "&:hover": {
                     backgroundColor: "rgba(255,255,255,0.05)",
@@ -186,11 +186,11 @@ const Auctions = () => {
                   fontWeight: "medium",
                   fontSize: "0.875rem",
                   transition: "transform 0.2s ease",
-                }}
-              >
-                View All
-              </Button>
-            </motion.div>
+                    }}
+                     >
+                       View All
+                  </Button>
+                  </motion.div>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
