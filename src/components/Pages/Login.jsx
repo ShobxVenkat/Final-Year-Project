@@ -9,6 +9,7 @@ import {
   Paper,
 } from "@mui/material";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const [isRegister, setIsRegister] = useState(false);
@@ -42,11 +43,10 @@ const Login = () => {
           sx={{
             position: "absolute",
             top: 0,
-            left: isRegister ? 0 : "50%",
-            width: "50%",
+            left: isRegister ? 0 : { xs: 0, md: "50%" },
+            width: { xs: "100%", md: "50%" },
             height: "100%",
             background: "linear-gradient(135deg, orange 0%, #f97316 100%)",
-            borderRadius: "0 0 0 0",
             transition: "left 0.6s ease",
             zIndex: 1,
           }}
@@ -61,8 +61,10 @@ const Login = () => {
             position: "relative",
             zIndex: 2,
             transition: "transform 0.6s ease",
-            transform: isRegister ? "translateX(100%)" : "translateX(0)",
-            // To ensure text is readable on colored bg, transparent bg added
+            transform: {
+              xs: "none",
+              md: isRegister ? "translateX(100%)" : "translateX(0)",
+            },
             backgroundColor: isRegister ? "transparent" : "rgba(0,0,0,0.2)",
             borderRadius: "0 20px 20px 0",
           }}
@@ -73,7 +75,7 @@ const Login = () => {
           <Typography variant="h5" fontWeight={600} sx={{ mt: 4 }}>
             {isRegister ? "Create Account" : "Welcome Back"}
           </Typography>
-          <Typography variant="body2" color="gray" sx={{ mb: 4 }}>
+          <Typography variant="body2" color="#c62828" sx={{ mb: 4 }}>
             {isRegister ? "Register your account" : "Access your account"}
           </Typography>
 
@@ -148,8 +150,14 @@ const Login = () => {
                   component={Link}
                   to="/forgot-password"
                   underline="hover"
-                  color="warning.main"
                   variant="body2"
+                  sx={{
+                    color: "white", // <-- white color
+                    fontWeight: 500,
+                    "&:hover": {
+                      color: "#f97316", // optional: hover me orange dikhana ho to
+                    },
+                  }}
                 >
                   Forgot password?
                 </MuiLink>
@@ -214,21 +222,23 @@ const Login = () => {
             p: 3,
             overflow: "hidden",
             transition: "transform 0.6s ease",
-            transform: isRegister ? "translateX(-100%)" : "translateX(0)",
+            transform: {
+              xs: "none",
+              md: isRegister ? "translateX(-100%)" : "translateX(0)",
+            },
             zIndex: 2,
           }}
         >
-          {/* Decorative Circles */}
           {[
-            { top: "10%", left: "15%", size: 40, color: "orange", duration: "3s" },
-            { bottom: "15%", right: "20%", size: 40, color: "#3a3e5a", duration: "4s" },
-            { bottom: "25%", left: "10%", size: 12, color: "#26C281", duration: "5s" },
-            { top: "30%", right: "10%", size: 8, color: "orange", duration: "3.5s" },
-            { bottom: "10%", right: "30%", size: 20, color: "#26C281", duration: "4.5s" },
+            { top: "10%", left: "15%", size: 40, color: "orange", duration: 3 },
+            { bottom: "15%", right: "20%", size: 40, color: "#3a3e5a", duration: 4 },
+            { bottom: "25%", left: "10%", size: 12, color: "#26C281", duration: 5 },
+            { top: "30%", right: "10%", size: 8, color: "orange", duration: 3.5 },
+            { bottom: "10%", right: "30%", size: 20, color: "#26C281", duration: 4.5 },
           ].map((circle, index) => (
-            <Box
+            <motion.div
               key={index}
-              sx={{
+              style={{
                 position: "absolute",
                 top: circle.top,
                 bottom: circle.bottom,
@@ -238,7 +248,16 @@ const Login = () => {
                 height: circle.size,
                 borderRadius: "50%",
                 backgroundColor: circle.color,
-                animation: `floatUpDown ${circle.duration} ease-in-out infinite`,
+              }}
+              animate={{
+                y: ["0%", "-20%", "0%"],
+              }}
+              transition={{
+                duration: circle.duration,
+                repeat: Infinity,
+                repeatType: "reverse",
+                ease: "easeInOut",
+                delay: index * 0.3,
               }}
             />
           ))}
