@@ -32,9 +32,11 @@ export default function FeaturedProductsList({ onAddToCart }) {
     return () => window.removeEventListener("resize", updateLayout);
   }, []);
 
-  const [btnHover, setBtnHover] = useState(null);
+  // Change: store hover state per product id
+  const [btnHover, setBtnHover] = useState({}); // { [productId]: "add" | "view" | "buy" | null }
 
-  const buttonStyle = (btn) => ({
+  // Modified button style to receive productId and button type
+  const buttonStyle = (productId, btn) => ({
     flex: isMobile ? "unset" : 1,
     width: isMobile ? "100%" : "auto",
     margin: isMobile ? "6px 0" : "0 4px",
@@ -42,7 +44,7 @@ export default function FeaturedProductsList({ onAddToCart }) {
     borderRadius: 8,
     border: "none",
     background:
-      btnHover === btn
+      btnHover[productId] === btn
         ? "linear-gradient(to right, #f97316, #ea580c)"
         : "linear-gradient(to right, #f59e0b, #f97316)",
     color: "#fff",
@@ -56,7 +58,6 @@ export default function FeaturedProductsList({ onAddToCart }) {
 
   return (
     <>
-      {/* Toaster for toast notifications on top-left */}
       <Toaster position="top-left" reverseOrder={false} />
 
       <Box
@@ -125,34 +126,46 @@ export default function FeaturedProductsList({ onAddToCart }) {
               }}
             >
               <button
-                style={buttonStyle("add")}
-                onMouseEnter={() => setBtnHover("add")}
-                onMouseLeave={() => setBtnHover(null)}
+                style={buttonStyle(product.id, "add")}
+                onMouseEnter={() =>
+                  setBtnHover((prev) => ({ ...prev, [product.id]: "add" }))
+                }
+                onMouseLeave={() =>
+                  setBtnHover((prev) => ({ ...prev, [product.id]: null }))
+                }
                 onClick={() => {
                   onAddToCart(product);
-                  toast.success(`${product.title} added to cart!`); // Toast here
+                  toast.success(`${product.title} added to cart!`);
                 }}
               >
                 Add to Cart
               </button>
 
               <button
-                style={buttonStyle("view")}
-                onMouseEnter={() => setBtnHover("view")}
-                onMouseLeave={() => setBtnHover(null)}
+                style={buttonStyle(product.id, "view")}
+                onMouseEnter={() =>
+                  setBtnHover((prev) => ({ ...prev, [product.id]: "view" }))
+                }
+                onMouseLeave={() =>
+                  setBtnHover((prev) => ({ ...prev, [product.id]: null }))
+                }
                 onClick={() => {
-                  // Could open product details modal or page here
+                  // view details logic
                 }}
               >
                 View
               </button>
 
               <button
-                style={buttonStyle("buy")}
-                onMouseEnter={() => setBtnHover("buy")}
-                onMouseLeave={() => setBtnHover(null)}
+                style={buttonStyle(product.id, "buy")}
+                onMouseEnter={() =>
+                  setBtnHover((prev) => ({ ...prev, [product.id]: "buy" }))
+                }
+                onMouseLeave={() =>
+                  setBtnHover((prev) => ({ ...prev, [product.id]: null }))
+                }
                 onClick={() => {
-                  // Buy logic here
+                  // buy logic
                 }}
               >
                 Buy
