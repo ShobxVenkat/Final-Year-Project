@@ -1,82 +1,158 @@
 "use client";
 
-import { motion, useAnimation } from "framer-motion";
-import { useEffect } from "react";
-import { Box, Typography, Button, useTheme, useMediaQuery } from "@mui/material";
+import React, { useEffect, useRef } from "react";
+import { motion, useAnimation, useMotionValue } from "framer-motion";
+import { Box, Typography, Button, useTheme, useMediaQuery, IconButton } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
-const bannerProducts = [
-  {
-    id: 1,
-    title: "Wireless Headphones",
-    price: 3500,
-    image:
-      "https://images.unsplash.com/photo-1610041321327-b794c052db27?q=80&w=2940&auto=format&fit=crop",
-    description: "Noise cancelling, wireless comfort for daily use.",
-  },
-  {
-    id: 2,
-    title: "Smartwatch Series 6",
-    price: 12999,
-    image:
-      "https://images.unsplash.com/photo-1461141346587-763ab02bced9?q=80&w=2900&auto=format&fit=crop",
-    description: "Fitness tracking, calls, notifications on your wrist.",
-  },
-  {
-    id: 3,
-    title: "Gaming Keyboard",
-    price: 5400,
-    image:
-      "https://images.unsplash.com/photo-1629360517815-4bc68a3ead00?q=80&w=2940&auto=format&fit=crop",
-    description: "RGB mechanical keyboard for hardcore gamers.",
-  },
-];
+import dummyProducts from "../Extra/DummyProducts";
 
 export default function AutoScrollBanner() {
   const theme = useTheme();
-
-  // Media query to detect if screen width is less than 600px (mobile)
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-
-  // Controls for animation
   const controls = useAnimation();
+  const navigate = useNavigate();
 
-  useEffect(() => {
+  const x = useMotionValue(0);
+
+  const cardWidth = isMobile ? 200 : 300;
+  const cardGap = 20;
+  const cardHeight = isMobile ? 220 : 320;
+
+  const duplicatedItems = [...dummyProducts, ...dummyProducts];
+  const totalWidth = duplicatedItems.length * (cardWidth + cardGap);
+
+  const scrollStep = cardWidth + cardGap;
+
+  const resumeTimeout = useRef(null);
+  const isHovered = useRef(false);
+
+  // Smooth infinite scroll
+  const startAutoScroll = (fromX = 0) => {
     controls.start({
-      x: ["0%", "-50%"], // Animate leftwards by 50%
+      x: [-fromX, -(totalWidth / 2 + fromX)],
       transition: {
         x: {
           repeat: Infinity,
           repeatType: "loop",
-          duration: 30,
+          duration: 1000,  // adjust speed here
           ease: "linear",
         },
       },
     });
-  }, [controls]);
+  };
 
-  // Duplicate products for seamless loop
-  const duplicatedItems = [...bannerProducts, ...bannerProducts];
+  const stopAutoScroll = () => {
+    controls.stop();
+    if (resumeTimeout.current) clearTimeout(resumeTimeout.current);
+  };
 
-  // Responsive card size:
-  const cardWidth = isMobile ? 200 : 300;  // Smaller width on mobile
-  const cardHeight = isMobile ? 220 : 320; // Smaller height on mobile
+  useEffect(() => {
+    startAutoScroll();
+    return () => {
+      controls.stop();
+      if (resumeTimeout.current) clearTimeout(resumeTimeout.current);
+    };
+  }, [controls, totalWidth]);
+
+  // Arrow click handler: moves scroll and pauses animation temporarily
+  const handleScroll = (direction) => {
+    stopAutoScroll();
+
+    // Current position (negative value)
+    const currentX = x.get();
+
+    // Calculate new position (clamp between 0 and -half width)
+    let newX = direction === "left" ? currentX + scrollStep : currentX - scrollStep;
+    if (newX > 0) newX = 0;
+    if (newX < -totalWidth / 2) newX = -totalWidth / 2;
+
+    x.set(newX);
+
+    // Resume auto scroll after 3 seconds
+    resumeTimeout.current = setTimeout(() => {
+      startAutoScroll(-newX);
+    }, 5000);
+  };
+
+  // Pause auto scroll when hovering arrow buttons
+  const handleMouseEnter = () => {
+    isHovered.current = true;
+    stopAutoScroll();
+    if (resumeTimeout.current) clearTimeout(resumeTimeout.current);
+  };
+
+  // Resume auto scroll 3s after mouse leaves arrow buttons
+  const handleMouseLeave = () => {
+    isHovered.current = false;
+    resumeTimeout.current = setTimeout(() => {
+      if (!isHovered.current) {
+        // Resume from current x position
+        startAutoScroll(-x.get());
+      }
+    }, 3000);
+  };
 
   return (
     <Box
       sx={{
+        position: "relative",
         overflow: "hidden",
         width: "100vw",
         backgroundColor: "#121212",
-        py: isMobile ? 3 : 6, // less vertical padding on mobile
+        py: isMobile ? 3 : 6,
       }}
     >
+      {/* Left Arrow */}
+      <IconButton
+        onClick={() => handleScroll("left")}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        sx={{
+          position: "absolute",
+          left: 8,
+          top: "50%",
+          transform: "translateY(-50%)",
+          color: "white",
+          backgroundColor: "rgba(0,0,0,0.4)",
+          "&:hover": { backgroundColor: "rgba(0,0,0,0.7)" },
+          zIndex: 10,
+        }}
+        aria-label="Scroll Left"
+      >
+        <ArrowBackIosNewIcon />
+      </IconButton>
+
+      {/* Right Arrow */}
+      <IconButton
+        onClick={() => handleScroll("right")}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        sx={{
+          position: "absolute",
+          right: 8,
+          top: "50%",
+          transform: "translateY(-50%)",
+          color: "white",
+          backgroundColor: "rgba(0,0,0,0.4)",
+          "&:hover": { backgroundColor: "rgba(0,0,0,0.7)" },
+          zIndex: 10,
+        }}
+        aria-label="Scroll Right"
+      >
+        <ArrowForwardIosIcon />
+      </IconButton>
+
       <motion.div
-        animate={controls}
         style={{
           display: "flex",
-          width: `${duplicatedItems.length * (cardWidth + 20)}px`, // total width based on card size + gap
-          gap: "20px",
+          width: totalWidth,
+          gap: `${cardGap}px`,
+          x: x,
         }}
+        animate={controls}
       >
         {duplicatedItems.map((product, i) => (
           <Box
@@ -130,6 +206,7 @@ export default function AutoScrollBanner() {
                   fontWeight: "bold",
                   fontSize: isMobile ? "0.7rem" : "0.875rem",
                 }}
+                onClick={() => navigate(`/category/${product.slug}`)}
               >
                 Buy Now
               </Button>

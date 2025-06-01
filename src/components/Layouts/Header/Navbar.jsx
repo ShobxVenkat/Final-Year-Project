@@ -18,42 +18,44 @@ const NavLinks = [
   { name: "Home", path: "/" },
   { name: "Auctions", path: "/auctions" },
   { name: "Shop", path: "/shop" },
-  {
-    name: "Categories",
-    path: "/categories",
-    dropdown: [
-      {
-        icon: <FaTshirt className="text-orange-500 text-xl" />,
-        title: "Fashion & Apparel",
-        subtitle: "Clothing, shoes, accessories",
-        href: "/categories/fashion",
-      },
-      {
-        icon: <FaMobileAlt className="text-orange-500 text-xl" />,
-        title: "Electronics",
-        subtitle: "Phones, tablets, gadgets",
-        href: "/categories/electronics",
-      },
-      {
-        icon: <FaLaptop className="text-orange-500 text-xl" />,
-        title: "Computers",
-        subtitle: "Laptops, components, peripherals",
-        href: "/categories/computers",
-      },
-      {
-        icon: <FaHome className="text-orange-500 text-xl" />,
-        title: "Home & Garden",
-        subtitle: "Furniture, decor, appliances",
-        href: "/categories/home",
-      },
-      {
-        icon: <FaBookOpen className="text-orange-500 text-xl" />,
-        title: "Collectibles",
-        subtitle: "Art, antiques, rare items",
-        href: "/categories/collectibles",
-      },
-    ],
-  },
+  
+    {
+      name: "Categories",
+      path: "/categories",
+      dropdown: [
+        {
+          icon: <FaTshirt className="text-orange-500 text-xl" />,
+          title: "Fashion & Apparel",
+          subtitle: "Clothing, shoes, accessories",
+          href: "/category/fashion-apparel",
+        },
+        {
+          icon: <FaMobileAlt className="text-orange-500 text-xl" />,
+          title: "Electronics",
+          subtitle: "Phones, tablets, gadgets",
+          href: "/category/electronics",
+        },
+        {
+          icon: <FaLaptop className="text-orange-500 text-xl" />,
+          title: "Computers",
+          subtitle: "Laptops, components, peripherals",
+          href: "/category/computers",
+        },
+        {
+          icon: <FaHome className="text-orange-500 text-xl" />,
+          title: "Home & Garden",
+          subtitle: "Furniture, decor, appliances",
+          href: "/category/home-garden",
+        },
+        {
+          icon: <FaBookOpen className="text-orange-500 text-xl" />,
+          title: "Collectibles",
+          subtitle: "Art, antiques, rare items",
+          href: "/category/collectibles",
+        },
+      ],
+    }
+    
 ];
 
 export default function Navbar() {

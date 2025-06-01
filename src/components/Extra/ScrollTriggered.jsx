@@ -1,55 +1,51 @@
 import React, { useState, useEffect } from "react";
 import { motion, useAnimation } from "framer-motion";
-import { Button } from "@mui/material";
-import { FiClock, FiUsers, FiArrowRight, FiPlus, FiBell } from "react-icons/fi";
+
+import { useNavigate } from "react-router-dom";
 
 const products = [
   {
     id: 1,
     name: "Raybun Sunglasses",
+    category: "fashion-apparel",
     price: "₹499",
-    image:
-      "https://images.unsplash.com/photo-1732139637065-1088495050db?q=80&w=3130&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    description:
-      "Stylish and durable Raybun sunglasses offering 100% UV protection and glare reduction. Perfect for everyday wear and outdoor adventures.",
+    image: "https://images.unsplash.com/photo-1732139637065-1088495050db?q=80&w=3130&auto=format&fit=crop",
+    description: "Stylish and durable Raybun sunglasses offering 100% UV protection and glare reduction.",
   },
   {
     id: 2,
     name: "Canon DSLR",
+    category: "electronics",
     price: "₹499",
-    image:
-      "https://images.unsplash.com/photo-1625545013865-80da35181abf?q=80&w=2942&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    description:
-      "Capture stunning photos and videos with the Canon DSLR featuring high-resolution sensor and versatile shooting modes for beginners and pros alike.",
+    image: "https://images.unsplash.com/photo-1625545013865-80da35181abf?q=80&w=2942&auto=format&fit=crop",
+    description: "Capture stunning photos and videos with the Canon DSLR featuring high-resolution sensor.",
   },
   {
     id: 3,
     name: "Gaming Mouse",
+    category: "computers",
     price: "₹899",
-    image:
-      "https://images.unsplash.com/photo-1616296425622-4560a2ad83de?q=80&w=3113&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    description:
-      "High-precision ergonomic gaming mouse with customizable DPI and RGB lighting. Designed for comfort during long gaming sessions.",
+    image: "https://images.unsplash.com/photo-1616296425622-4560a2ad83de?q=80&w=3113&auto=format&fit=crop",
+    description: "High-precision ergonomic gaming mouse with customizable DPI and RGB lighting.",
   },
   {
     id: 4,
     name: "Flower Pots",
+    category: "home-garden",
     price: "₹599",
-    image:
-      "https://images.unsplash.com/photo-1585445490582-9872899757b7?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    description:
-      "Elegant ceramic flower pots perfect for indoor plants. Adds a touch of nature and style to your living space.",
+    image: "https://images.unsplash.com/photo-1585445490582-9872899757b7?q=80&w=3087&auto=format&fit=crop",
+    description: "Elegant ceramic flower pots perfect for indoor plants.",
   },
   {
     id: 5,
     name: "Laughing Buddha mini",
+    category: "collectibles",
     price: "₹599",
-    image:
-      "https://images.unsplash.com/photo-1622354688049-e1a21bcb88bc?q=80&w=3150&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    description:
-      "Miniature Laughing Buddha statue made from resin, symbolizes happiness, wealth, and prosperity. Great for home or office decor.",
+    image: "https://images.unsplash.com/photo-1622354688049-e1a21bcb88bc?q=80&w=3150&auto=format&fit=crop",
+    description: "Miniature Laughing Buddha statue made from resin, symbolizes happiness and prosperity.",
   },
 ];
+
 
 
 
@@ -64,54 +60,50 @@ export default function ScrollTriggered() {
   );
 }
 
-
 function ProductCard({ product, i }) {
-    const [isHovered, setIsHovered] = useState(false);
-    const [btnHovered, setBtnHovered] = useState(false);
-    const controls = useAnimation();
-    const [isMobile, setIsMobile] = useState(false);
-    const ref = React.useRef(null);
-  
-    useEffect(() => {
-      const checkMobile = () => setIsMobile(window.innerWidth <= 768);
-      checkMobile();
-      window.addEventListener("resize", checkMobile);
-      return () => window.removeEventListener("resize", checkMobile);
-    }, []);
-  
-    // For desktop: hover controls animation; for mobile: scroll (intersection observer) controls animation
-    useEffect(() => {
-      if (!isMobile) {
-        // Desktop: animate on hover
-        controls.start(isHovered ? "onscreen" : "offscreen");
-        return;
-      }
-  
-      // Mobile: Use Intersection Observer to control animation on scroll
-      const element = ref.current;
-      if (!element) return;
-  
-      const observer = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) {
-            controls.start("onscreen");
-          } else {
-            controls.start("offscreen");
-          }
-        },
-        {
-          threshold: 0.5, // 50% of card visible triggers animation
-        }
-      );
-  
-      observer.observe(element);
-  
-      return () => {
-        observer.disconnect();
-      };
-    }, [isHovered, isMobile, controls]);
+  const [isHovered, setIsHovered] = useState(false);
+  const [btnHovered, setBtnHovered] = useState(false);
+  const controls = useAnimation();
+  const [isMobile, setIsMobile] = useState(false);
+  const ref = React.useRef(null);
+  const navigate = useNavigate();
 
-  // Button style with gradient + hover effect
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) {
+      controls.start(isHovered ? "onscreen" : "offscreen");
+      return;
+    }
+
+    const element = ref.current;
+    if (!element) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          controls.start("onscreen");
+        } else {
+          controls.start("offscreen");
+        }
+      },
+      {
+        threshold: 0.5,
+      }
+    );
+
+    observer.observe(element);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [isHovered, isMobile, controls]);
+
   const buttonStyle = {
     width: "100%",
     padding: "10px 0",
@@ -132,8 +124,8 @@ function ProductCard({ product, i }) {
   };
 
   
+  
   return (
-    
     <motion.div
       ref={ref}
       className="product-card"
@@ -151,14 +143,16 @@ function ProductCard({ product, i }) {
             <span style={name}>{product.name}</span>
             <span style={price}>{product.price}</span>
           </div>
-  
+
           {(isMobile ? true : isHovered) && (
             <div style={details}>
               <p style={desc}>{product.description}</p>
               <button
                 style={buttonStyle}
-                onMouseEnter={() => setBtnHovered(true)}
+                onMouseEnter={() => setBtnHovered(true)}    
                 onMouseLeave={() => setBtnHovered(false)}
+                onClick={() => navigate(`/category/${product.category}`)}
+              
               >
                 View All
               </button>
@@ -168,8 +162,9 @@ function ProductCard({ product, i }) {
       </motion.div>
     </motion.div>
   );
-  
+
 }
+
 
 // === Animation Variants ===
 const cardVariants = {

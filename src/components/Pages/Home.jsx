@@ -139,7 +139,7 @@ const Home = () => {
     '&:hover': {
       background: 'linear-gradient(to bottom, #ff416c, #ff4b2b)',
       color: 'white',
-      boxShadow: '0 0 20px #ff416c',
+      
       border: '1px solid transparent',
     },
   }}

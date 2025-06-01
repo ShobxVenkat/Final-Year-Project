@@ -26,7 +26,7 @@ export default function TextSlider() {
         <motion.div
           className="whitespace-nowrap flex gap-8"
           animate={{ x: ["100%", "-100%"] }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
         >
           {[...texts, ...texts].map((text, idx) => (
             <span
