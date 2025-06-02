@@ -32,16 +32,18 @@ const headingVariants = {
 
 const categories = [
   { slug: "electronics", title: "Electronics" },
-  { slug: "fashion", title: "Fashion" },
-  { slug: "home", title: "Home & Kitchen" },
-  { slug: "books", title: "Books" },
-  { slug: "fitness", title: "Fitness" },
-  // Add more as needed...
+  { slug: "fashion-apparel", title: "Fashion & Apparel" },
+  { slug: "computers", title: "Computers" },
+  { slug: "home-garden", title: "Home & Garden" },
+  { slug: "collectibles", title: "Collectibles" },
 ];
 
+import { useNavigate } from "react-router-dom";
+
 function ProductCard({ product, index, onAddToCart }) {
-  const cardRef = useRef(null);
-  const [glarePos, setGlarePos] = useState({ x: 50, y: 50 });
+  const navigate = useNavigate();
+  const cardRef = React.useRef(null);
+  const [glarePos, setGlarePos] = React.useState({ x: 50, y: 50 });
 
   const handleMouseMove = (e) => {
     if (!cardRef.current) return;
@@ -55,6 +57,11 @@ function ProductCard({ product, index, onAddToCart }) {
     setGlarePos({ x: 50, y: 50 });
   };
 
+  // Yahan click handler add kiya
+  const handleCardClick = () => {
+    navigate(`/product/${product.id}`);
+  };
+
   return (
     <motion.div
       custom={index}
@@ -65,6 +72,7 @@ function ProductCard({ product, index, onAddToCart }) {
       className="relative bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl shadow-lg cursor-pointer overflow-hidden transition-transform duration-300 hover:scale-105"
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onClick={handleCardClick} // click handler yahan
       ref={cardRef}
     >
       <img
@@ -98,13 +106,19 @@ function ProductCard({ product, index, onAddToCart }) {
         <div className="mt-4 flex gap-3">
           <button
             className="flex-1 bg-green-600 hover:bg-green-700 text-white text-sm py-2 px-4 rounded shadow"
-            onClick={() => onAddToCart(product)}
+            onClick={(e) => {
+              e.stopPropagation();  // Important: button clicks should not trigger card click navigation
+              onAddToCart(product);
+            }}
           >
             Add to Cart
           </button>
           <button
             className="flex-1 bg-white text-green-700 hover:bg-green-100 font-semibold text-sm py-2 px-4 rounded shadow"
-            onClick={() => console.log("Buy Now:", product.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              console.log("Buy Now:", product.id);
+            }}
           >
             Buy Now
           </button>
@@ -113,6 +127,7 @@ function ProductCard({ product, index, onAddToCart }) {
     </motion.div>
   );
 }
+
 
 export default function CategoryPage() {
   const { categoryName } = useParams();

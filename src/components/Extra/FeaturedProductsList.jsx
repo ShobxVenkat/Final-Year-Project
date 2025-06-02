@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { toast, Toaster } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";  // <-- import this
 
 import dummyProducts from "./DummyProducts";
 const products = dummyProducts;
 
 export default function FeaturedProductsList({ onAddToCart }) {
+  const navigate = useNavigate();  // <-- initialize navigate
+
   const [isMobile, setIsMobile] = useState(false);
   const [columns, setColumns] = useState("repeat(4, 1fr)");
 
@@ -32,10 +35,8 @@ export default function FeaturedProductsList({ onAddToCart }) {
     return () => window.removeEventListener("resize", updateLayout);
   }, []);
 
-  // Change: store hover state per product id
-  const [btnHover, setBtnHover] = useState({}); // { [productId]: "add" | "view" | "buy" | null }
+  const [btnHover, setBtnHover] = useState({}); // for hover on buttons
 
-  // Modified button style to receive productId and button type
   const buttonStyle = (productId, btn) => ({
     flex: isMobile ? "unset" : 1,
     width: isMobile ? "100%" : "auto",
@@ -43,10 +44,7 @@ export default function FeaturedProductsList({ onAddToCart }) {
     padding: "10px 0",
     borderRadius: 8,
     border: "none",
-    background:
-      btnHover[productId] === btn
-        ? "linear-gradient(to right, #f97316, #ea580c)"
-        : "linear-gradient(to right, #f59e0b, #f97316)",
+    background: "#16a34a",
     color: "#fff",
     cursor: "pointer",
     fontWeight: "bold",
@@ -70,21 +68,23 @@ export default function FeaturedProductsList({ onAddToCart }) {
           margin: "auto",
         }}
       >
-        {products.map((product) => (
+       {products.slice(0, 20).map((product)=> (
           <Box
-            key={product.id}
-            sx={{
-              background: "#fff",
-              borderRadius: 2,
-              padding: 2,
-              boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              maxWidth: 280,
-              margin: "auto",
-            }}
-          >
+          key={product.id}
+          sx={{
+            background: "#fff",
+            borderRadius: 2,
+            padding: 2,
+            boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            width: "100%",      // full width of grid cell
+            cursor: "pointer",
+            // REMOVE maxWidth and margin: auto
+          }}
+          onClick={() => navigate(`/product/${product.id}`)}
+        >
             <img
               src={product.image}
               alt={product.title}
@@ -124,6 +124,8 @@ export default function FeaturedProductsList({ onAddToCart }) {
                 flexDirection: isMobile ? "column" : "row",
                 gap: 1,
               }}
+              // prevent card click from triggering when clicking buttons
+              onClick={(e) => e.stopPropagation()}
             >
               <button
                 style={buttonStyle(product.id, "add")}
@@ -142,21 +144,6 @@ export default function FeaturedProductsList({ onAddToCart }) {
               </button>
 
               <button
-                style={buttonStyle(product.id, "view")}
-                onMouseEnter={() =>
-                  setBtnHover((prev) => ({ ...prev, [product.id]: "view" }))
-                }
-                onMouseLeave={() =>
-                  setBtnHover((prev) => ({ ...prev, [product.id]: null }))
-                }
-                onClick={() => {
-                  // view details logic
-                }}
-              >
-                View
-              </button>
-
-              <button
                 style={buttonStyle(product.id, "buy")}
                 onMouseEnter={() =>
                   setBtnHover((prev) => ({ ...prev, [product.id]: "buy" }))
@@ -165,7 +152,7 @@ export default function FeaturedProductsList({ onAddToCart }) {
                   setBtnHover((prev) => ({ ...prev, [product.id]: null }))
                 }
                 onClick={() => {
-                  // buy logic
+                  // buy logic here
                 }}
               >
                 Buy

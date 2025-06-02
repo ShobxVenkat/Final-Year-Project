@@ -61,35 +61,29 @@ export default function AutoScrollBanner() {
   const handleScroll = (direction) => {
     stopAutoScroll();
 
-    // Current position (negative value)
     const currentX = x.get();
 
-    // Calculate new position (clamp between 0 and -half width)
     let newX = direction === "left" ? currentX + scrollStep : currentX - scrollStep;
     if (newX > 0) newX = 0;
     if (newX < -totalWidth / 2) newX = -totalWidth / 2;
 
     x.set(newX);
 
-    // Resume auto scroll after 3 seconds
     resumeTimeout.current = setTimeout(() => {
       startAutoScroll(-newX);
     }, 5000);
   };
 
-  // Pause auto scroll when hovering arrow buttons
   const handleMouseEnter = () => {
     isHovered.current = true;
     stopAutoScroll();
     if (resumeTimeout.current) clearTimeout(resumeTimeout.current);
   };
 
-  // Resume auto scroll 3s after mouse leaves arrow buttons
   const handleMouseLeave = () => {
     isHovered.current = false;
     resumeTimeout.current = setTimeout(() => {
       if (!isHovered.current) {
-        // Resume from current x position
         startAutoScroll(-x.get());
       }
     }, 3000);
@@ -170,7 +164,9 @@ export default function AutoScrollBanner() {
               alignItems: "flex-end",
               padding: "20px",
               color: "white",
+              cursor: "pointer",
             }}
+            onClick={() => navigate(`/product/${product.id}`)}
           >
             <Box
               sx={{
@@ -206,7 +202,10 @@ export default function AutoScrollBanner() {
                   fontWeight: "bold",
                   fontSize: isMobile ? "0.7rem" : "0.875rem",
                 }}
-                onClick={() => navigate(`/category/${product.slug}`)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(`buy}`);
+                }}
               >
                 Buy Now
               </Button>
