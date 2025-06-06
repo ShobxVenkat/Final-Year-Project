@@ -3,9 +3,6 @@ import { motion } from "framer-motion";
 import monitorImg from "../../assets/img.png";
 import { useEffect, useState } from "react";
 
-
-
-
 const Home = () => {
   const [timeLeft, setTimeLeft] = useState({
     hours: 3,
@@ -56,16 +53,16 @@ const Home = () => {
         <div className="absolute top-[50%] right-[20%] w-16 h-16 bg-orange-500 rounded-full blur-xl opacity-50 animate-pulse" />
 
         <div className="hidden md:block">
-        {Array.from({ length: 40 }).map((_, i) => (
-          <div
-            key={i}
-            className="absolute w-1 h-1 rounded-full bg-orange-300 opacity-30"
-            style={{
-              top: `${Math.random() * 100}%`,
-              left: `${Math.random() * 100}%`,
-            }}
-          />
-        ))}
+          {Array.from({ length: 40 }).map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 rounded-full bg-orange-300 opacity-30"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+              }}
+            />
+          ))}
         </div>
       </div>
 
@@ -109,44 +106,36 @@ const Home = () => {
             className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start sm:justify-center items-center"
             variants={item}
           >
+           <button className="custom-explore-button">
+  <svg className="svgIcon" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+    <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zm50.7-186.9L162.4 380.6c-19.4 7.5-38.5-11.6-31-31l55.5-144.3c3.3-8.5 9.9-15.1 18.4-18.4l144.3-55.5c19.4-7.5 38.5 11.6 31 31L325.1 306.7c-3.2 8.5-9.9 15.1-18.4 18.4zM288 256a32 32 0 1 0 -64 0 32 32 0 1 0 64 0z" />
+  </svg>
+  Explore Auctions
+</button>
+
+
             <Button
-              variant="contained"
+              variant="outlined"
               sx={{
-                backgroundColor: "#fb923c",
-                "&:hover": { backgroundColor: "#f97316" },
-                paddingX: 3,
-                paddingY: 1.5,
+                background: "transparent",
+                color: "white",
                 fontWeight: "bold",
-                borderRadius: 2,
+                padding: "0.75rem 2rem",
+                borderRadius: "2rem",
                 textTransform: "none",
-                width: { xs: "50%", sm: "auto" },
+                fontSize: "1 rem",
+                border: "1px solid white",
+                transition: "all 0.3s ",
+                "&:hover": {
+                  background: "linear-gradient(to bottom, #ff416c, #ff4b2b)",
+                  color: "white",
+
+                  border: "1px solid transparent",
+                },
               }}
             >
-              Explore Auctions
+              How it works
             </Button>
-            <Button
-  variant="outlined"
-  sx={{
-    background: 'transparent',
-    color: 'white',
-    fontWeight: 'bold',
-    padding: '0.75rem 2rem',
-    borderRadius: '2rem',
-    textTransform: 'none',
-    fontSize: '1 rem',
-    border: '1px solid white',
-    transition: 'all 0.3s ',
-    '&:hover': {
-      background: 'linear-gradient(to bottom, #ff416c, #ff4b2b)',
-      color: 'white',
-      
-      border: '1px solid transparent',
-    },
-  }}
->
-  How it works
-</Button>
-
           </motion.div>
         </motion.div>
 
@@ -257,15 +246,7 @@ const Home = () => {
         }}
         className="absolute bottom-1/4 right-1/4 w-12 h-12 bg-blue-500/10 rounded-lg pointer-events-none"
       />
-
-
-
-
-      
     </div>
-
-
-
   );
 };
 

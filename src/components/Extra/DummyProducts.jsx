@@ -5,7 +5,8 @@ const dummyProducts = [
     title: "Men's Casual T-Shirt",
     slug: "fashion-apparel",
     price: 799,
-    image: "https://images.unsplash.com/photo-1618453292459-53424b66bb6a?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    image:
+      "https://images.unsplash.com/photo-1618453292459-53424b66bb6a?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     fallbackImage: "https://source.unsplash.com/400x400/?clothes",
     specifications: [
       "100% Cotton",
@@ -116,11 +117,7 @@ const dummyProducts = [
     price: 699,
     image: "/images/fashion9.jpg",
     fallbackImage: "/images/fallback.jpg",
-    specifications: [
-      "Lightweight fabric",
-      "Soft texture",
-      "Multiple colors",
-    ],
+    specifications: ["Lightweight fabric", "Soft texture", "Multiple colors"],
   },
   {
     id: 10,
@@ -184,13 +181,10 @@ const dummyProducts = [
     title: "Smartwatch Pro",
     slug: "electronics",
     price: 12999,
-    image: "https://source.unsplash.com/400x400/?smartwatch,electronics,wearable",
+    image:
+      "https://source.unsplash.com/400x400/?smartwatch,electronics,wearable",
     fallbackImage: "https://source.unsplash.com/400x400/?watch",
-    specifications: [
-      "Heart rate monitor",
-      "GPS tracking",
-      "Water resistant",
-    ],
+    specifications: ["Heart rate monitor", "GPS tracking", "Water resistant"],
   },
   {
     id: 15,
@@ -199,11 +193,7 @@ const dummyProducts = [
     price: 45999,
     image: "https://source.unsplash.com/400x400/?4k,tv,electronics",
     fallbackImage: "https://source.unsplash.com/400x400/?television",
-    specifications: [
-      "55 inch display",
-      "HDR10+ support",
-      "Smart TV features",
-    ],
+    specifications: ["55 inch display", "HDR10+ support", "Smart TV features"],
   },
   {
     id: 16,
@@ -212,11 +202,7 @@ const dummyProducts = [
     price: 899,
     image: "/images/electronics6.jpg",
     fallbackImage: "/images/fallback.jpg",
-    specifications: [
-      "USB powered",
-      "3 fan speed levels",
-      "Ergonomic design",
-    ],
+    specifications: ["USB powered", "3 fan speed levels", "Ergonomic design"],
   },
   {
     id: 17,
@@ -225,11 +211,7 @@ const dummyProducts = [
     price: 1799,
     image: "/images/electronics7.jpg",
     fallbackImage: "/images/fallback.jpg",
-    specifications: [
-      "1080p video",
-      "Built-in microphone",
-      "Plug & play USB",
-    ],
+    specifications: ["1080p video", "Built-in microphone", "Plug & play USB"],
   },
   {
     id: 18,
@@ -238,11 +220,7 @@ const dummyProducts = [
     price: 1499,
     image: "/images/electronics8.jpg",
     fallbackImage: "/images/fallback.jpg",
-    specifications: [
-      "Dual USB ports",
-      "Fast charging",
-      "Compact design",
-    ],
+    specifications: ["Dual USB ports", "Fast charging", "Compact design"],
   },
   {
     id: 19,
@@ -251,11 +229,7 @@ const dummyProducts = [
     price: 2499,
     image: "/images/electronics9.jpg",
     fallbackImage: "/images/fallback.jpg",
-    specifications: [
-      "RGB lighting",
-      "Ergonomic design",
-      "Adjustable DPI",
-    ],
+    specifications: ["RGB lighting", "Ergonomic design", "Adjustable DPI"],
   },
   {
     id: 20,
@@ -264,11 +238,7 @@ const dummyProducts = [
     price: 3999,
     image: "/images/electronics10.jpg",
     fallbackImage: "/images/fallback.jpg",
-    specifications: [
-      "RGB backlit keys",
-      "Mechanical switches",
-      "USB wired",
-    ],
+    specifications: ["RGB backlit keys", "Mechanical switches", "USB wired"],
   },
 
   // Computers (10)
@@ -279,11 +249,7 @@ const dummyProducts = [
     price: 4999,
     image: "https://source.unsplash.com/400x400/?keyboard,mechanical,computer",
     fallbackImage: "https://source.unsplash.com/400x400/?keyboard",
-    specifications: [
-      "RGB backlight",
-      "Cherry MX switches",
-      "Ergonomic design",
-    ],
+    specifications: ["RGB backlight", "Cherry MX switches", "Ergonomic design"],
   },
   {
     id: 22,
@@ -305,11 +271,7 @@ const dummyProducts = [
     price: 17999,
     image: "https://source.unsplash.com/400x400/?monitor,computer",
     fallbackImage: "https://source.unsplash.com/400x400/?screen",
-    specifications: [
-      "2560x1440 resolution",
-      "IPS panel",
-      "75Hz refresh rate",
-    ],
+    specifications: ["2560x1440 resolution", "IPS panel", "75Hz refresh rate"],
   },
   {
     id: 24,
@@ -318,11 +280,7 @@ const dummyProducts = [
     price: 5999,
     image: "https://source.unsplash.com/400x400/?hard-drive,external,computer",
     fallbackImage: "https://source.unsplash.com/400x400/?hard-drive",
-    specifications: [
-      "2TB storage",
-      "USB 3.0",
-      "Portable design",
-    ],
+    specifications: ["2TB storage", "USB 3.0", "Portable design"],
   },
   {
     id: 25,
@@ -331,11 +289,7 @@ const dummyProducts = [
     price: 2999,
     image: "https://source.unsplash.com/400x400/?usb-hub,computer",
     fallbackImage: "https://source.unsplash.com/400x400/?usb",
-    specifications: [
-      "4 ports",
-      "Aluminum body",
-      "Plug and play",
-    ],
+    specifications: ["4 ports", "Aluminum body", "Plug and play"],
   },
   {
     id: 26,
@@ -344,11 +298,7 @@ const dummyProducts = [
     price: 2999,
     image: "/images/computers6.jpg",
     fallbackImage: "/images/fallback.jpg",
-    specifications: [
-      "Surround sound",
-      "Noise cancelling mic",
-      "LED lights",
-    ],
+    specifications: ["Surround sound", "Noise cancelling mic", "LED lights"],
   },
   {
     id: 27,
@@ -357,11 +307,7 @@ const dummyProducts = [
     price: 899,
     image: "/images/computers7.jpg",
     fallbackImage: "/images/fallback.jpg",
-    specifications: [
-      "Aluminum build",
-      "Adjustable height",
-      "Portable design",
-    ],
+    specifications: ["Aluminum build", "Adjustable height", "Portable design"],
   },
   {
     id: 28,
@@ -370,10 +316,7 @@ const dummyProducts = [
     price: 199,
     image: "/images/computers8.jpg",
     fallbackImage: "/images/fallback.jpg",
-    specifications: [
-      "Slide cover",
-      "Adhesive backing",
-    ],
+    specifications: ["Slide cover", "Adhesive backing"],
   },
   {
     id: 29,
@@ -382,11 +325,7 @@ const dummyProducts = [
     price: 4999,
     image: "/images/computers9.jpg",
     fallbackImage: "/images/fallback.jpg",
-    specifications: [
-      "RGB lighting",
-      "Mechanical switches",
-      "Wired USB",
-    ],
+    specifications: ["RGB lighting", "Mechanical switches", "Wired USB"],
   },
   {
     id: 30,
@@ -423,11 +362,7 @@ const dummyProducts = [
     price: 1599,
     image: "https://source.unsplash.com/400x400/?indoor-plant,home,garden",
     fallbackImage: "https://source.unsplash.com/400x400/?plant",
-    specifications: [
-      "Set of 3 plants",
-      "Low maintenance",
-      "Air purifying",
-    ],
+    specifications: ["Set of 3 plants", "Low maintenance", "Air purifying"],
   },
   {
     id: 33,
@@ -436,11 +371,7 @@ const dummyProducts = [
     price: 2199,
     image: "https://source.unsplash.com/400x400/?garden-tools,gardening",
     fallbackImage: "https://source.unsplash.com/400x400/?tools",
-    specifications: [
-      "5 pieces",
-      "Stainless steel",
-      "Ergonomic handles",
-    ],
+    specifications: ["5 pieces", "Stainless steel", "Ergonomic handles"],
   },
   {
     id: 34,
@@ -449,11 +380,7 @@ const dummyProducts = [
     price: 3499,
     image: "https://source.unsplash.com/400x400/?coffee-maker,kitchen",
     fallbackImage: "https://source.unsplash.com/400x400/?coffee",
-    specifications: [
-      "Programmable timer",
-      "12 cup capacity",
-      "Auto shut-off",
-    ],
+    specifications: ["Programmable timer", "12 cup capacity", "Auto shut-off"],
   },
   {
     id: 35,
@@ -462,11 +389,7 @@ const dummyProducts = [
     price: 2199,
     image: "https://source.unsplash.com/400x400/?wall-art,painting,home",
     fallbackImage: "https://source.unsplash.com/400x400/?art",
-    specifications: [
-      "Canvas print",
-      "Modern design",
-      "Ready to hang",
-    ],
+    specifications: ["Canvas print", "Modern design", "Ready to hang"],
   },
   {
     id: 36,
@@ -475,11 +398,7 @@ const dummyProducts = [
     price: 6999,
     image: "/images/home6.jpg",
     fallbackImage: "/images/fallback.jpg",
-    specifications: [
-      "WiFi enabled",
-      "Remote control",
-      "Energy saving",
-    ],
+    specifications: ["WiFi enabled", "Remote control", "Energy saving"],
   },
   {
     id: 37,
@@ -488,11 +407,7 @@ const dummyProducts = [
     price: 799,
     image: "/images/home7.jpg",
     fallbackImage: "/images/fallback.jpg",
-    specifications: [
-      "Handcrafted",
-      "12 inch height",
-      "Glossy finish",
-    ],
+    specifications: ["Handcrafted", "12 inch height", "Glossy finish"],
   },
   {
     id: 38,
@@ -501,11 +416,7 @@ const dummyProducts = [
     price: 4999,
     image: "/images/home8.jpg",
     fallbackImage: "/images/fallback.jpg",
-    specifications: [
-      "10-piece set",
-      "Non-stick coating",
-      "Dishwasher safe",
-    ],
+    specifications: ["10-piece set", "Non-stick coating", "Dishwasher safe"],
   },
   {
     id: 39,
@@ -527,11 +438,7 @@ const dummyProducts = [
     price: 1199,
     image: "/images/home10.jpg",
     fallbackImage: "/images/fallback.jpg",
-    specifications: [
-      "Weather resistant",
-      "20 LED bulbs",
-      "8 modes",
-    ],
+    specifications: ["Weather resistant", "20 LED bulbs", "8 modes"],
   },
 
   // Collectibles (10)
@@ -555,11 +462,7 @@ const dummyProducts = [
     price: 7999,
     image: "https://source.unsplash.com/400x400/?antique,vase",
     fallbackImage: "https://source.unsplash.com/400x400/?vase",
-    specifications: [
-      "Porcelain",
-      "Hand-painted",
-      "19th century",
-    ],
+    specifications: ["Porcelain", "Hand-painted", "19th century"],
   },
   {
     id: 43,
@@ -568,10 +471,7 @@ const dummyProducts = [
     price: 1599,
     image: "https://source.unsplash.com/400x400/?vinyl-record,music",
     fallbackImage: "https://source.unsplash.com/400x400/?vinyl",
-    specifications: [
-      "Limited edition",
-      "High fidelity sound",
-    ],
+    specifications: ["Limited edition", "High fidelity sound"],
   },
   {
     id: 44,
@@ -580,11 +480,7 @@ const dummyProducts = [
     price: 4999,
     image: "https://source.unsplash.com/400x400/?retro-camera,vintage",
     fallbackImage: "https://source.unsplash.com/400x400/?camera",
-    specifications: [
-      "35mm film",
-      "Manual focus",
-      "Collectible item",
-    ],
+    specifications: ["35mm film", "Manual focus", "Collectible item"],
   },
   {
     id: 45,
@@ -593,10 +489,7 @@ const dummyProducts = [
     price: 2999,
     image: "https://source.unsplash.com/400x400/?baseball,signed,collectible",
     fallbackImage: "https://source.unsplash.com/400x400/?baseball",
-    specifications: [
-      "Autographed",
-      "Official league ball",
-    ],
+    specifications: ["Autographed", "Official league ball"],
   },
 
   {
@@ -619,11 +512,7 @@ const dummyProducts = [
     price: 1299,
     image: "/images/collectibles7.jpg",
     fallbackImage: "/images/fallback.jpg",
-    specifications: [
-      "Vintage stamps",
-      "Limited edition",
-      "Protective album",
-    ],
+    specifications: ["Vintage stamps", "Limited edition", "Protective album"],
   },
   {
     id: 48,
@@ -645,11 +534,7 @@ const dummyProducts = [
     price: 1799,
     image: "/images/collectibles9.jpg",
     fallbackImage: "/images/fallback.jpg",
-    specifications: [
-      "Signed by artist",
-      "Glossy finish",
-      "Limited print",
-    ],
+    specifications: ["Signed by artist", "Glossy finish", "Limited print"],
   },
   {
     id: 50,
@@ -658,11 +543,7 @@ const dummyProducts = [
     price: 999,
     image: "/images/collectibles10.jpg",
     fallbackImage: "/images/fallback.jpg",
-    specifications: [
-      "10 classic movies",
-      "DVD format",
-      "Collector's edition",
-    ],
+    specifications: ["10 classic movies", "DVD format", "Collector's edition"],
   },
 ];
 

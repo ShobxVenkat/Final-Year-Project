@@ -19,7 +19,7 @@ function CartButton({ count, onClick, isMobile }) {
         fontWeight: "600", // font-semibold
         fontSize: "0.875rem", // text-sm
         cursor: "pointer",
-         
+
         display: "flex",
         alignItems: "center",
         gap: "0.5rem", // gap-2
@@ -30,11 +30,9 @@ function CartButton({ count, onClick, isMobile }) {
       aria-label="Open Cart"
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = "scale(1.05)";
-       
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.transform = "scale(1)";
-       
       }}
     >
       <FiShoppingCart size={20} />
@@ -61,7 +59,13 @@ function CartButton({ count, onClick, isMobile }) {
   );
 }
 
-export default function Cart({ cartItems, setCartItems, drawerOpen, setDrawerOpen, isMobile }) {
+export default function Cart({
+  cartItems,
+  setCartItems,
+  drawerOpen,
+  setDrawerOpen,
+  isMobile,
+}) {
   function handleRemoveFromCart(index) {
     setCartItems((prev) => prev.filter((_, i) => i !== index));
     if (!isMobile) toast(`Removed item from cart.`);
@@ -90,21 +94,21 @@ export default function Cart({ cartItems, setCartItems, drawerOpen, setDrawerOpe
         />
       )}
 
-<Drawer
-  anchor="right"
-  open={drawerOpen}
-  onClose={() => setDrawerOpen(false)}
-  PaperProps={{
-    sx: {
-      width: isMobile ? "80vw" : 400,
-      backgroundColor: "#000",  // black background
-      color: "#fff",            // white text
-      padding: 2,
-      display: "flex",
-      flexDirection: "column",
-    },
-  }}
->
+      <Drawer
+        anchor="right"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        PaperProps={{
+          sx: {
+            width: isMobile ? "80vw" : 400,
+            backgroundColor: "#000", // black background
+            color: "#fff", // white text
+            padding: 2,
+            display: "flex",
+            flexDirection: "column",
+          },
+        }}
+      >
         <Box
           sx={{
             display: "flex",
@@ -114,7 +118,10 @@ export default function Cart({ cartItems, setCartItems, drawerOpen, setDrawerOpe
           }}
         >
           <Typography variant="h6">Your Cart</Typography>
-          <IconButton onClick={() => setDrawerOpen(false)} sx={{ color: "white" }}>
+          <IconButton
+            onClick={() => setDrawerOpen(false)}
+            sx={{ color: "white" }}
+          >
             <FiX />
           </IconButton>
         </Box>
@@ -193,8 +200,7 @@ export default function Cart({ cartItems, setCartItems, drawerOpen, setDrawerOpe
           variant="contained"
           sx={{
             mt: 3,
-            background:
-              "linear-gradient(to right, #f97316, #f59e0b)",
+            background: "linear-gradient(to right, #f97316, #f59e0b)",
             color: "white",
             fontWeight: "bold",
             borderRadius: 2,

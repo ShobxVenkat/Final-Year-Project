@@ -2,10 +2,17 @@
 
 import React, { useEffect, useRef } from "react";
 import { motion, useAnimation, useMotionValue } from "framer-motion";
-import { Box, Typography, Button, useTheme, useMediaQuery, IconButton } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Button,
+  useTheme,
+  useMediaQuery,
+  IconButton,
+} from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 import dummyProducts from "../Extra/DummyProducts";
 
@@ -37,7 +44,7 @@ export default function AutoScrollBanner() {
         x: {
           repeat: Infinity,
           repeatType: "loop",
-          duration: 1000,  // adjust speed here
+          duration: 1000, // adjust speed here
           ease: "linear",
         },
       },
@@ -63,7 +70,8 @@ export default function AutoScrollBanner() {
 
     const currentX = x.get();
 
-    let newX = direction === "left" ? currentX + scrollStep : currentX - scrollStep;
+    let newX =
+      direction === "left" ? currentX + scrollStep : currentX - scrollStep;
     if (newX > 0) newX = 0;
     if (newX < -totalWidth / 2) newX = -totalWidth / 2;
 

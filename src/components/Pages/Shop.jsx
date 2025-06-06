@@ -7,7 +7,7 @@ import CarouselBanner from "../Extra/CarouselBanner";
 import CategoryButtons from "../Extra/CategoryButtons";
 import ScrollTriggered from "../Extra/ScrollTriggered";
 import FeaturedProductsList from "../Extra/FeaturedProductsList";
-import Cart from "../Layouts/Header/CartButton";  // Import your Cart component
+import Cart from "../Layouts/Header/CartButton"; // Import your Cart component
 
 export default function Shop() {
   const [cartItems, setCartItems] = useState([]);
@@ -69,7 +69,8 @@ export default function Shop() {
             },
             fontWeight: 700,
             color: "transparent",
-            backgroundImage: "linear-gradient(to right, #f59e0b, #f97316, #f59e0b)",
+            backgroundImage:
+              "linear-gradient(to right, #f59e0b, #f97316, #f59e0b)",
             backgroundClip: "text",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",

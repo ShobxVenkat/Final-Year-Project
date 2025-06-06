@@ -9,31 +9,38 @@ const products = [
     name: "Raybun Sunglasses",
     category: "fashion-apparel",
     price: "₹499",
-    image: "https://images.unsplash.com/photo-1732139637065-1088495050db?q=80&w=3130&auto=format&fit=crop",
-    description: "Stylish and durable Raybun sunglasses offering 100% UV protection and glare reduction.",
+    image:
+      "https://images.unsplash.com/photo-1732139637065-1088495050db?q=80&w=3130&auto=format&fit=crop",
+    description:
+      "Stylish and durable Raybun sunglasses offering 100% UV protection and glare reduction.",
   },
   {
     id: 2,
     name: "Canon DSLR",
     category: "electronics",
     price: "₹499",
-    image: "https://images.unsplash.com/photo-1625545013865-80da35181abf?q=80&w=2942&auto=format&fit=crop",
-    description: "Capture stunning photos and videos with the Canon DSLR featuring high-resolution sensor.",
+    image:
+      "https://images.unsplash.com/photo-1625545013865-80da35181abf?q=80&w=2942&auto=format&fit=crop",
+    description:
+      "Capture stunning photos and videos with the Canon DSLR featuring high-resolution sensor.",
   },
   {
     id: 3,
     name: "Gaming Mouse",
     category: "computers",
     price: "₹899",
-    image: "https://images.unsplash.com/photo-1616296425622-4560a2ad83de?q=80&w=3113&auto=format&fit=crop",
-    description: "High-precision ergonomic gaming mouse with customizable DPI and RGB lighting.",
+    image:
+      "https://images.unsplash.com/photo-1616296425622-4560a2ad83de?q=80&w=3113&auto=format&fit=crop",
+    description:
+      "High-precision ergonomic gaming mouse with customizable DPI and RGB lighting.",
   },
   {
     id: 4,
     name: "Flower Pots",
     category: "home-garden",
     price: "₹599",
-    image: "https://images.unsplash.com/photo-1585445490582-9872899757b7?q=80&w=3087&auto=format&fit=crop",
+    image:
+      "https://images.unsplash.com/photo-1585445490582-9872899757b7?q=80&w=3087&auto=format&fit=crop",
     description: "Elegant ceramic flower pots perfect for indoor plants.",
   },
   {
@@ -41,14 +48,12 @@ const products = [
     name: "Laughing Buddha mini",
     category: "collectibles",
     price: "₹599",
-    image: "https://images.unsplash.com/photo-1622354688049-e1a21bcb88bc?q=80&w=3150&auto=format&fit=crop",
-    description: "Miniature Laughing Buddha statue made from resin, symbolizes happiness and prosperity.",
+    image:
+      "https://images.unsplash.com/photo-1622354688049-e1a21bcb88bc?q=80&w=3150&auto=format&fit=crop",
+    description:
+      "Miniature Laughing Buddha statue made from resin, symbolizes happiness and prosperity.",
   },
 ];
-
-
-
-
 
 export default function ScrollTriggered() {
   return (
@@ -123,8 +128,6 @@ function ProductCard({ product, i }) {
     transition: "background 0.3s ease, box-shadow 0.3s ease",
   };
 
-  
-  
   return (
     <motion.div
       ref={ref}
@@ -149,10 +152,9 @@ function ProductCard({ product, i }) {
               <p style={desc}>{product.description}</p>
               <button
                 style={buttonStyle}
-                onMouseEnter={() => setBtnHovered(true)}    
+                onMouseEnter={() => setBtnHovered(true)}
                 onMouseLeave={() => setBtnHovered(false)}
                 onClick={() => navigate(`/category/${product.category}`)}
-              
               >
                 View All
               </button>
@@ -162,9 +164,7 @@ function ProductCard({ product, i }) {
       </motion.div>
     </motion.div>
   );
-
 }
-
 
 // === Animation Variants ===
 const cardVariants = {
@@ -188,7 +188,7 @@ const cardVariants = {
 // === Styles ===
 const container = {
   margin: "0px auto",
-  
+
   maxWidth: 600,
   paddingBottom: 100,
   width: "100%",

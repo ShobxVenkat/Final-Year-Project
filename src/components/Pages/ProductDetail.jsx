@@ -54,14 +54,30 @@ export default function ProductDetail({ setCartItems, setDrawerOpen }) {
   );
 
   const reviews = [
-    { id: 1, user: "Rahul", rating: 5, comment: "Awesome product! Highly recommended." },
-    { id: 2, user: "Sneha", rating: 4, comment: "Good quality, worth the price." },
+    {
+      id: 1,
+      user: "Rahul",
+      rating: 5,
+      comment: "Awesome product! Highly recommended.",
+    },
+    {
+      id: 2,
+      user: "Sneha",
+      rating: 4,
+      comment: "Good quality, worth the price.",
+    },
     { id: 3, user: "Amit", rating: 3, comment: "Decent but could be better." },
   ];
 
   const faqs = [
-    { question: "What is the warranty period?", answer: "This product comes with a 1-year manufacturer warranty." },
-    { question: "Can I return the product if not satisfied?", answer: "Yes, you can return within 30 days of purchase." },
+    {
+      question: "What is the warranty period?",
+      answer: "This product comes with a 1-year manufacturer warranty.",
+    },
+    {
+      question: "Can I return the product if not satisfied?",
+      answer: "Yes, you can return within 30 days of purchase.",
+    },
   ];
 
   const discountPercent = 10;
@@ -79,7 +95,9 @@ export default function ProductDetail({ setCartItems, setDrawerOpen }) {
     return Array.from({ length: 5 }, (_, i) => (
       <svg
         key={i}
-        className={`w-4 h-4 inline ${i + 1 <= rating ? "text-yellow-400" : "text-gray-400"}`}
+        className={`w-4 h-4 inline ${
+          i + 1 <= rating ? "text-yellow-400" : "text-gray-400"
+        }`}
         fill="currentColor"
         viewBox="0 0 20 20"
       >
@@ -92,7 +110,9 @@ export default function ProductDetail({ setCartItems, setDrawerOpen }) {
     <>
       <div
         className={`min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white p-6 max-w-6xl mx-auto
-        transition-opacity duration-500 ${isTransitioning ? "opacity-0" : "opacity-100"}`}
+        transition-opacity duration-500 ${
+          isTransitioning ? "opacity-0" : "opacity-100"
+        }`}
       >
         {/* Product Detail Section */}
         <motion.div
@@ -178,7 +198,9 @@ export default function ProductDetail({ setCartItems, setDrawerOpen }) {
                 </h2>
                 <div className="flex items-center gap-3 mb-3">
                   <div className="flex">{renderStars(4)}</div>
-                  <span className="text-green-400 font-semibold text-sm">4.0</span>
+                  <span className="text-green-400 font-semibold text-sm">
+                    4.0
+                  </span>
                   <span className="text-gray-400 text-sm">
                     ({reviews.length} reviews)
                   </span>
@@ -186,11 +208,16 @@ export default function ProductDetail({ setCartItems, setDrawerOpen }) {
 
                 <div className="space-y-4 max-w-xl">
                   {reviews.map(({ id, user, rating, comment }) => (
-                    <div key={id} className="bg-white/10 p-3 rounded-md shadow-sm">
+                    <div
+                      key={id}
+                      className="bg-white/10 p-3 rounded-md shadow-sm"
+                    >
                       <p className="font-semibold text-green-400">{user}</p>
                       <div className="flex items-center gap-2 text-yellow-400">
                         {renderStars(rating)}
-                        <span className="text-gray-300 text-xs">({rating}/5)</span>
+                        <span className="text-gray-300 text-xs">
+                          ({rating}/5)
+                        </span>
                       </div>
                       <p className="text-gray-300 text-sm mt-1">{comment}</p>
                     </div>
@@ -220,9 +247,14 @@ export default function ProductDetail({ setCartItems, setDrawerOpen }) {
             {/* Buttons */}
             <div className="flex flex-wrap gap-4">
               <button
-                onClick={() => alert("Proceed to Buy clicked!")}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  navigate(`buy}`);
+                }}
                 className="bg-transparent border border-green-500 hover:bg-green-600 hover:text-white px-6 py-3 rounded-md font-semibold transition"
-              >
+             
+             
+             >
                 Buy Now
               </button>
             </div>

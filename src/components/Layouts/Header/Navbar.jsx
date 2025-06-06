@@ -18,44 +18,43 @@ const NavLinks = [
   { name: "Home", path: "/" },
   { name: "Auctions", path: "/auctions" },
   { name: "Shop", path: "/shop" },
-  
-    {
-      name: "Categories",
-      path: "/categories",
-      dropdown: [
-        {
-          icon: <FaTshirt className="text-orange-500 text-xl" />,
-          title: "Fashion & Apparel",
-          subtitle: "Clothing, shoes, accessories",
-          href: "/category/fashion-apparel",
-        },
-        {
-          icon: <FaMobileAlt className="text-orange-500 text-xl" />,
-          title: "Electronics",
-          subtitle: "Phones, tablets, gadgets",
-          href: "/category/electronics",
-        },
-        {
-          icon: <FaLaptop className="text-orange-500 text-xl" />,
-          title: "Computers",
-          subtitle: "Laptops, components, peripherals",
-          href: "/category/computers",
-        },
-        {
-          icon: <FaHome className="text-orange-500 text-xl" />,
-          title: "Home & Garden",
-          subtitle: "Furniture, decor, appliances",
-          href: "/category/home-garden",
-        },
-        {
-          icon: <FaBookOpen className="text-orange-500 text-xl" />,
-          title: "Collectibles",
-          subtitle: "Art, antiques, rare items",
-          href: "/category/collectibles",
-        },
-      ],
-    }
-    
+
+  {
+    name: "Categories",
+    path: "/categories",
+    dropdown: [
+      {
+        icon: <FaTshirt className="text-orange-500 text-xl" />,
+        title: "Fashion & Apparel",
+        subtitle: "Clothing, shoes, accessories",
+        href: "/category/fashion-apparel",
+      },
+      {
+        icon: <FaMobileAlt className="text-orange-500 text-xl" />,
+        title: "Electronics",
+        subtitle: "Phones, tablets, gadgets",
+        href: "/category/electronics",
+      },
+      {
+        icon: <FaLaptop className="text-orange-500 text-xl" />,
+        title: "Computers",
+        subtitle: "Laptops, components, peripherals",
+        href: "/category/computers",
+      },
+      {
+        icon: <FaHome className="text-orange-500 text-xl" />,
+        title: "Home & Garden",
+        subtitle: "Furniture, decor, appliances",
+        href: "/category/home-garden",
+      },
+      {
+        icon: <FaBookOpen className="text-orange-500 text-xl" />,
+        title: "Collectibles",
+        subtitle: "Art, antiques, rare items",
+        href: "/category/collectibles",
+      },
+    ],
+  },
 ];
 
 export default function Navbar() {
@@ -107,10 +106,7 @@ export default function Navbar() {
                           onClick={() => toggleDropdown(index)}
                           className="relative px-3 py-2 text-gray-300 hover:text-white transition-colors group"
                         >
-                          <div className="flex items-center">
-                            {link.name}
-                            
-                          </div>
+                          <div className="flex items-center">{link.name}</div>
                           <span
                             className={`absolute left-3 -bottom-1 h-[2px] w-0 bg-orange-500 group-hover:w-[calc(100%-1.5rem)] ${
                               openDropdownIndex === index
@@ -130,7 +126,10 @@ export default function Navbar() {
                             >
                               <ul className="space-y-3">
                                 {link.dropdown.map((subItem, subIndex) => (
-                                  <li key={subIndex} className="text-left group">
+                                  <li
+                                    key={subIndex}
+                                    className="text-left group"
+                                  >
                                     <Link
                                       to={subItem.href}
                                       className="flex items-start p-3 rounded-md transition-all duration-200 hover:bg-gray-800"

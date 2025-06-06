@@ -21,7 +21,7 @@ const featuredItems = [
       "825GB SSD storage",
       "4K UHD Blu-ray drive",
       "120Hz refresh rate support",
-      "3D Audio support"
+      "3D Audio support",
     ],
     currentBid: 5990,
     bids: 28,
@@ -45,7 +45,7 @@ const featuredItems = [
       "Size: US 10",
       "Colorway: White/Varsity Red-Black",
       "Style Code: DZ5485-612",
-      "Original release: 1985"
+      "Original release: 1985",
     ],
     currentBid: 12000,
     bids: 15,
@@ -69,7 +69,7 @@ const featuredItems = [
       "6.8-inch QHD+ Dynamic AMOLED 2X",
       "200MP + 12MP + 10MP + 10MP cameras",
       "5000mAh battery with 45W fast charging",
-      "S Pen included"
+      "S Pen included",
     ],
     currentBid: 15000,
     bids: 32,
@@ -93,7 +93,7 @@ const featuredItems = [
       "45mm Midnight Aluminum Case",
       "Blood oxygen and ECG apps",
       "Water resistant 50m",
-      "WatchOS 9 out of the box"
+      "WatchOS 9 out of the box",
     ],
     currentBid: 2800,
     bids: 19,
@@ -117,7 +117,7 @@ const featuredItems = [
       "30-hour battery life (NC on)",
       "Multi-point connection",
       "Touch sensor controls",
-      "Built-in Alexa and Google Assistant"
+      "Built-in Alexa and Google Assistant",
     ],
     currentBid: 11900,
     bids: 12,
@@ -192,7 +192,7 @@ const FeaturedSection = () => {
   };
 
   return (
-    <div 
+    <div
       className="relative w-full overflow-hidden cursor-pointer"
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
@@ -228,7 +228,7 @@ const FeaturedSection = () => {
               className="relative"
             >
               {/* <div className={`absolute inset-0 ${currentItem.bgGradient} rounded-2xl -z-10`} /> */}
-              
+
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6 rounded-2xl">
                 {/* Image section */}
                 <div className="relative h-64 md:h-96 rounded-xl overflow-hidden shadow-2xl bg-gray-900/50 backdrop-blur-sm border border-white/10">
@@ -254,7 +254,6 @@ const FeaturedSection = () => {
                       {currentItem.category}
                     </div>
                   </div>
-
                 </div>
 
                 {/* Details section */}
@@ -269,19 +268,24 @@ const FeaturedSection = () => {
                     >
                       {currentItem.title}
                     </h3>
-                    
+
                     <div className="flex items-center gap-2 mb-4">
                       <div className="flex items-center text-amber-400 bg-amber-400/10 px-2 py-1 rounded text-sm">
                         <FiEye className="mr-1" />
                         <span>{currentItem.watchers} watching</span>
                       </div>
                     </div>
-                    
-                    <p className="text-gray-200 mb-6">{currentItem.description}</p>
+
+                    <p className="text-gray-200 mb-6">
+                      {currentItem.description}
+                    </p>
 
                     <div className="mb-6 grid grid-cols-2 gap-2">
                       {currentItem.specs.map((spec, index) => (
-                        <div key={index} className="flex items-center text-sm text-gray-300">
+                        <div
+                          key={index}
+                          className="flex items-center text-sm text-gray-300"
+                        >
                           <span className="w-2 h-2 rounded-full bg-amber-400 mr-2"></span>
                           {spec}
                         </div>
@@ -295,7 +299,11 @@ const FeaturedSection = () => {
                           <span className="text-sm">Time Left</span>
                         </div>
                         <div className="text-xl font-mono font-bold">
-                          {`${formatTime(currentItem.timeLeft.hours)}:${formatTime(currentItem.timeLeft.minutes)}:${formatTime(currentItem.timeLeft.seconds)}`}
+                          {`${formatTime(
+                            currentItem.timeLeft.hours
+                          )}:${formatTime(
+                            currentItem.timeLeft.minutes
+                          )}:${formatTime(currentItem.timeLeft.seconds)}`}
                         </div>
                       </div>
                       <div className="flex flex-col items-center bg-black/30 p-3 rounded-lg min-w-[100px]">
@@ -308,7 +316,9 @@ const FeaturedSection = () => {
                         </div>
                       </div>
                       <div className="flex flex-col items-center bg-black/30 p-3 rounded-lg min-w-[100px]">
-                        <div className="text-gray-300 mb-1 text-sm">Retail Price</div>
+                        <div className="text-gray-300 mb-1 text-sm">
+                          Retail Price
+                        </div>
                         <div className="text-lg line-through text-gray-400">
                           ₹{currentItem.retailPrice.toLocaleString()}
                         </div>
@@ -350,8 +360,8 @@ const FeaturedSection = () => {
                 setAutoSlide(true);
               }}
               className={`w-3 h-1 rounded-full transition-all duration-300 ${
-                index === currentIndex 
-                  ? "bg-amber-400 w-8 scale-110" 
+                index === currentIndex
+                  ? "bg-amber-400 w-8 scale-110"
                   : "bg-gray-600 hover:bg-gray-500"
               }`}
               aria-label={`Go to slide ${index + 1}`}

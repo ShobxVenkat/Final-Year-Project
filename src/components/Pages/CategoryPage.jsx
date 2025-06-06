@@ -3,9 +3,9 @@ import { useParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiFilter } from "react-icons/fi";
 import { RxCross2 } from "react-icons/rx";
-import toast, { Toaster } from "react-hot-toast";  // Import toast
+import toast, { Toaster } from "react-hot-toast"; // Import toast
 import dummyProducts from "../Extra/DummyProducts";
-import Cart from "../Layouts/Header/CartButton"; 
+import Cart from "../Layouts/Header/CartButton";
 
 const productVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -107,7 +107,7 @@ function ProductCard({ product, index, onAddToCart }) {
           <button
             className="flex-1 bg-green-600 hover:bg-green-700 text-white text-sm py-2 px-4 rounded shadow"
             onClick={(e) => {
-              e.stopPropagation();  // Important: button clicks should not trigger card click navigation
+              e.stopPropagation(); // Important: button clicks should not trigger card click navigation
               onAddToCart(product);
             }}
           >
@@ -117,6 +117,7 @@ function ProductCard({ product, index, onAddToCart }) {
             className="flex-1 bg-white text-green-700 hover:bg-green-100 font-semibold text-sm py-2 px-4 rounded shadow"
             onClick={(e) => {
               e.stopPropagation();
+              navigate(`buy}`);
               console.log("Buy Now:", product.id);
             }}
           >
@@ -127,7 +128,6 @@ function ProductCard({ product, index, onAddToCart }) {
     </motion.div>
   );
 }
-
 
 export default function CategoryPage() {
   const { categoryName } = useParams();
@@ -148,9 +148,7 @@ export default function CategoryPage() {
   const toggleCategory = (slug) => {
     setHasUserInteracted(true);
     setSelectedCategories((prev) =>
-      prev.includes(slug)
-        ? prev.filter((cat) => cat !== slug)
-        : [...prev, slug]
+      prev.includes(slug) ? prev.filter((cat) => cat !== slug) : [...prev, slug]
     );
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -168,14 +166,14 @@ export default function CategoryPage() {
       style: {
         background: "#333",
         color: "#fff",
-        
       },
     });
   };
 
   const filteredProductsRaw = dummyProducts.filter((product) => {
     const matchCategory =
-      selectedCategories.length === 0 || selectedCategories.includes(product.slug);
+      selectedCategories.length === 0 ||
+      selectedCategories.includes(product.slug);
     const matchPrice =
       product.price >= priceRange[0] && product.price <= priceRange[1];
     return matchCategory && matchPrice;
@@ -262,7 +260,10 @@ export default function CategoryPage() {
                 <h4 className="font-semibold mb-3">Categories</h4>
                 <div className="flex flex-col space-y-2 max-h-48 overflow-auto">
                   {categories.map(({ slug, title }) => (
-                    <label key={slug} className="inline-flex items-center space-x-2">
+                    <label
+                      key={slug}
+                      className="inline-flex items-center space-x-2"
+                    >
                       <input
                         type="checkbox"
                         checked={selectedCategories.includes(slug)}

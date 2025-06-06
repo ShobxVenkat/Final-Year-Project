@@ -74,7 +74,11 @@ export default function CategoryButtons() {
             {/* Wrap entire card in Link */}
             <Link
               to={`/category/${cat.slug}`}
-              style={{ cursor: "pointer", display: "block", borderRadius: "50%" }}
+              style={{
+                cursor: "pointer",
+                display: "block",
+                borderRadius: "50%",
+              }}
             >
               <Tilt
                 tiltMaxAngleX={15}
@@ -121,7 +125,13 @@ export default function CategoryButtons() {
                       zIndex: 0,
                     }}
                   />
-                  <span style={{ position: "relative", zIndex: 2, padding: "0 10px" }}>
+                  <span
+                    style={{
+                      position: "relative",
+                      zIndex: 2,
+                      padding: "0 10px",
+                    }}
+                  >
                     {cat.name}
                   </span>
                 </div>

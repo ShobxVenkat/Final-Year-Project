@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Box, Typography } from "@mui/material";
 import { toast, Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";  // <-- import this
+import { useNavigate } from "react-router-dom"; // <-- import this
 
 import dummyProducts from "./DummyProducts";
 const products = dummyProducts;
 
 export default function FeaturedProductsList({ onAddToCart }) {
-  const navigate = useNavigate();  // <-- initialize navigate
+  const navigate = useNavigate(); // <-- initialize navigate
 
   const [isMobile, setIsMobile] = useState(false);
   const [columns, setColumns] = useState("repeat(4, 1fr)");
@@ -68,23 +68,23 @@ export default function FeaturedProductsList({ onAddToCart }) {
           margin: "auto",
         }}
       >
-       {products.slice(0, 20).map((product)=> (
+        {products.slice(0, 20).map((product) => (
           <Box
-          key={product.id}
-          sx={{
-            background: "#fff",
-            borderRadius: 2,
-            padding: 2,
-            boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            width: "100%",      // full width of grid cell
-            cursor: "pointer",
-            // REMOVE maxWidth and margin: auto
-          }}
-          onClick={() => navigate(`/product/${product.id}`)}
-        >
+            key={product.id}
+            sx={{
+              background: "#fff",
+              borderRadius: 2,
+              padding: 2,
+              boxShadow: "0 4px 15px rgba(0,0,0,0.1)",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              width: "100%", // full width of grid cell
+              cursor: "pointer",
+              // REMOVE maxWidth and margin: auto
+            }}
+            onClick={() => navigate(`/product/${product.id}`)}
+          >
             <img
               src={product.image}
               alt={product.title}

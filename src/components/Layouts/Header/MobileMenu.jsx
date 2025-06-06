@@ -11,23 +11,23 @@ const MobileMenu = ({ isOpen, navItems, onClose }) => {
     setOpenDropdownIndex(openDropdownIndex === index ? null : index);
   };
 
-  // if the mobile menu is open and and screen width is lg so this useeffect closes the menu 
-   useEffect(() => {
+  // if the mobile menu is open and and screen width is lg so this useeffect closes the menu
+  useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024 && isOpen) {
         onClose();
       }
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
   return (
-    <div 
-      className="fixed inset-0 z-40 backdrop-blur-lg" 
+    <div
+      className="fixed inset-0 z-40 backdrop-blur-lg"
       style={{ top: "60px" }}
       onClick={onClose}
     >

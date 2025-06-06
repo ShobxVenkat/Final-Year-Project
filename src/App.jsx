@@ -8,6 +8,7 @@ import Auctions from "./components/Pages/Auctions";
 import Shop from "./components/Pages/Shop";
 import CategoryPage from "./components/Pages/CategoryPage";
 import ProductDetail from "./components/Pages/ProductDetail";
+import './App.css';
 
 
 export default function App() {

@@ -231,10 +231,34 @@ const Login = () => {
         >
           {[
             { top: "10%", left: "15%", size: 40, color: "orange", duration: 3 },
-            { bottom: "15%", right: "20%", size: 40, color: "#3a3e5a", duration: 4 },
-            { bottom: "25%", left: "10%", size: 12, color: "#26C281", duration: 5 },
-            { top: "30%", right: "10%", size: 8, color: "orange", duration: 3.5 },
-            { bottom: "10%", right: "30%", size: 20, color: "#26C281", duration: 4.5 },
+            {
+              bottom: "15%",
+              right: "20%",
+              size: 40,
+              color: "#3a3e5a",
+              duration: 4,
+            },
+            {
+              bottom: "25%",
+              left: "10%",
+              size: 12,
+              color: "#26C281",
+              duration: 5,
+            },
+            {
+              top: "30%",
+              right: "10%",
+              size: 8,
+              color: "orange",
+              duration: 3.5,
+            },
+            {
+              bottom: "10%",
+              right: "30%",
+              size: 20,
+              color: "#26C281",
+              duration: 4.5,
+            },
           ].map((circle, index) => (
             <motion.div
               key={index}

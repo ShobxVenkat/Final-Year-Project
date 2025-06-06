@@ -63,10 +63,10 @@ const Login = () => {
               sx={{
                 input: { color: "white" },
                 label: { color: "white" },
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': { borderColor: "#3A3E5A" },
-                  '&:hover fieldset': { borderColor: "orange" },
-                  '&.Mui-focused fieldset': { borderColor: "orange" },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": { borderColor: "#3A3E5A" },
+                  "&:hover fieldset": { borderColor: "orange" },
+                  "&.Mui-focused fieldset": { borderColor: "orange" },
                   backgroundColor: "#2A2D45",
                 },
               }}
@@ -82,10 +82,10 @@ const Login = () => {
               sx={{
                 input: { color: "white" },
                 label: { color: "white" },
-                '& .MuiOutlinedInput-root': {
-                  '& fieldset': { borderColor: "#3A3E5A" },
-                  '&:hover fieldset': { borderColor: "orange" },
-                  '&.Mui-focused fieldset': { borderColor: "orange" },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": { borderColor: "#3A3E5A" },
+                  "&:hover fieldset": { borderColor: "orange" },
+                  "&.Mui-focused fieldset": { borderColor: "orange" },
                   backgroundColor: "#2A2D45",
                 },
               }}
@@ -110,14 +110,12 @@ const Login = () => {
                 mt: 3,
                 py: 1.5,
                 backgroundColor: "orange",
-                '&:hover': { backgroundColor: "darkorange" },
+                "&:hover": { backgroundColor: "darkorange" },
               }}
               type="submit"
             >
               Sign Up
             </Button>
-
-            
           </Box>
         </Box>
 
@@ -141,11 +139,41 @@ const Login = () => {
         >
           {/* Decorative Circles */}
           {[
-            { top: "10%", left: "15%", size: 40, color: "orange", duration: "3s" },
-            { bottom: "15%", right: "20%", size: 40, color: "#3a3e5a", duration: "4s" },
-            { bottom: "25%", left: "10%", size: 12, color: "#26C281", duration: "5s" },
-            { top: "30%", right: "10%", size: 8, color: "orange", duration: "3.5s" },
-            { bottom: "10%", right: "30%", size: 20, color: "#26C281", duration: "4.5s" },
+            {
+              top: "10%",
+              left: "15%",
+              size: 40,
+              color: "orange",
+              duration: "3s",
+            },
+            {
+              bottom: "15%",
+              right: "20%",
+              size: 40,
+              color: "#3a3e5a",
+              duration: "4s",
+            },
+            {
+              bottom: "25%",
+              left: "10%",
+              size: 12,
+              color: "#26C281",
+              duration: "5s",
+            },
+            {
+              top: "30%",
+              right: "10%",
+              size: 8,
+              color: "orange",
+              duration: "3.5s",
+            },
+            {
+              bottom: "10%",
+              right: "30%",
+              size: 20,
+              color: "#26C281",
+              duration: "4.5s",
+            },
           ].map((circle, index) => (
             <Box
               key={index}
