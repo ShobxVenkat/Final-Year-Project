@@ -1,17 +1,21 @@
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@mui/material";
-import { motion } from "framer-motion";
-import { FiClock, FiUsers, FiArrowRight, FiPlus, FiBell } from "react-icons/fi";
+import {
+  FiClock,
+  FiUsers,
+  FiArrowRight,
+  FiPlus,
+  FiBell,
+  FiHeart,
+  FiChevronRight,
+} from "react-icons/fi";
 import { BsLightningFill } from "react-icons/bs";
+import { FaFire, FaRegClock } from "react-icons/fa";
 import FeaturedSection from "./FeaturedSection";
 
 const Auctions = () => {
-  const [featuredTimeLeft, setFeaturedTimeLeft] = useState({
-    hours: 2,
-    minutes: 45,
-    seconds: 30,
-  });
-
+  // Sample data for live auctions
   const [liveAuctions, setLiveAuctions] = useState([
     {
       id: 1,
@@ -20,6 +24,8 @@ const Auctions = () => {
       bids: 24,
       image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49",
       timeLeft: { hours: 1, minutes: 30, seconds: 45 },
+      category: "Watches",
+      watchers: 56,
     },
     {
       id: 3,
@@ -28,6 +34,8 @@ const Auctions = () => {
       bids: 18,
       image: "https://images.unsplash.com/photo-1579952363872-2898cd6f7c38",
       timeLeft: { hours: 0, minutes: 15, seconds: 10 },
+      category: "Collectibles",
+      watchers: 42,
     },
     {
       id: 4,
@@ -36,6 +44,8 @@ const Auctions = () => {
       bids: 15,
       image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28",
       timeLeft: { hours: 0, minutes: 25, seconds: 30 },
+      category: "Footwear",
+      watchers: 38,
     },
     {
       id: 5,
@@ -44,51 +54,48 @@ const Auctions = () => {
       bids: 22,
       image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e",
       timeLeft: { hours: 0, minutes: 10, seconds: 5 },
+      category: "Jewelry",
+      watchers: 71,
     },
   ]);
 
+  // Sample data for upcoming auctions
   const [upcomingAuctions, setUpcomingAuctions] = useState([
     {
-      id: 6,
+      id: 7,
       title: "Collector's Art Piece",
       startingBid: 2500,
       image: "https://images.unsplash.com/photo-1534447677768-be436bb09401",
-      startsIn: { days: 3, hours: 2 },
-    },
-    {
-      id: 7,
-      title: "Designer Handbag",
-      startingBid: 1800,
-      image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea",
-      startsIn: { days: 1, hours: 8 },
+      startsIn: { days: 0, hours: 2, minutes: 30 },
+      category: "Art",
     },
     {
       id: 8,
+      title: "Designer Handbag",
+      startingBid: 1800,
+      image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea",
+      startsIn: { days: 0, hours: 1, minutes: 45 },
+      category: "Fashion",
+    },
+    {
+      id: 9,
       title: "Vintage Vinyl Collection",
       startingBid: 950,
       image: "https://images.unsplash.com/photo-1572635148818-ef6fd45eb394",
-      startsIn: { days: 2, hours: 6 },
+      startsIn: { days: 0, hours: 3, minutes: 15 },
+      category: "Music",
+    },
+    {
+      id: 10,
+      title: "Rare Whiskey Collection",
+      startingBid: 3500,
+      image: "https://images.unsplash.com/photo-1600788886242-5c96aabe3757",
+      startsIn: { days: 0, hours: 4, minutes: 0 },
+      category: "Spirits",
     },
   ]);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setFeaturedTimeLeft((prev) => {
-        const seconds = prev.seconds - 1;
-        const minutes = seconds < 0 ? prev.minutes - 1 : prev.minutes;
-        const hours = minutes < 0 ? prev.hours - 1 : prev.hours;
-
-        return {
-          hours: hours < 0 ? 0 : hours,
-          minutes: minutes < 0 ? 59 : minutes,
-          seconds: seconds < 0 ? 59 : seconds,
-        };
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
+  // Update timers
   useEffect(() => {
     const timer = setInterval(() => {
       setLiveAuctions((prev) =>
@@ -108,29 +115,31 @@ const Auctions = () => {
           };
         })
       );
+
+      setUpcomingAuctions((prev) =>
+        prev.map((auction) => {
+          const { days, hours, minutes } = auction.startsIn;
+          let newMinutes = minutes - 1;
+          let newHours = newMinutes < 0 ? hours - 1 : hours;
+          let newDays = newHours < 0 ? days - 1 : days;
+
+          return {
+            ...auction,
+            startsIn: {
+              days: newDays < 0 ? 0 : newDays,
+              hours: newHours < 0 ? 23 : newHours,
+              minutes: newMinutes < 0 ? 59 : newMinutes,
+            },
+          };
+        })
+      );
     }, 1000);
 
     return () => clearInterval(timer);
   }, []);
 
-  const container = {
-    hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0 },
-  };
-
-  const cardHover = {
-    rest: { height: 180 },
-    hover: { height: 320 },
+  const formatTime = (time) => {
+    return time < 10 ? `0${time}` : time;
   };
 
   return (
@@ -157,242 +166,178 @@ const Auctions = () => {
 
       {/* Main content container */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Featured auctions section */}
         <FeaturedSection />
 
         {/* Live auctions section */}
         <motion.section
-          className="mb-16"
-          initial="hidden"
-          animate="show"
-          variants={container}
+          className="mb-16 mt-15"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2, duration: 0.6 }}
         >
-          <div className="flex justify-between items-center mb-8">
-            <motion.div variants={item} className="relative">
-              <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-amber-300 to-orange-400 bg-clip-text text-transparent">
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold flex items-center">
+              <FaFire className="text-amber-500 mr-3" />
+              <span className="bg-gradient-to-r from-amber-400 to-orange-500 bg-clip-text text-transparent">
                 Live Auctions
-              </h2>
-              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-amber-500/30 to-orange-500/30 rounded-full"></div>
-                </motion.div>
-                 <motion.div variants={item}>
-                  <Button
-                  endIcon={<FiArrowRight className="text-amber-400" />}
-                 sx={{
-                  color: "white",
-                  "&:hover": {
-                    backgroundColor: "rgba(255,255,255,0.05)",
-                    transform: "translateX(4px)",
-                  },
-                  textTransform: "none",
-                  fontWeight: "medium",
-                  fontSize: "0.875rem",
-                  transition: "transform 0.2s ease",
-                    }}
-                     >
-                       View All
-                  </Button>
-                  </motion.div>
+              </span>
+            </h2>
+            <button className="flex cursor-pointer items-center text-amber-400 hover:text-amber-300 transition-colors">
+              View All <FiChevronRight className="ml-1" />
+            </button>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {liveAuctions.map((auction) => (
-              <motion.div
-                key={auction.id}
-                className="relative bg-gray-800/50 rounded-xl overflow-hidden shadow-lg border border-gray-700"
-                initial="rest"
-                whileHover="hover"
-                animate="rest"
-                variants={{
-                  rest: {
-                    height: 180,
-                    transition: { duration: 0.3, ease: "easeOut" },
-                  },
-                  hover: {
-                    height: 320,
-                    transition: {
-                      duration: 0.3,
-                      ease: "easeOut",
-                      delay: 0.1,
-                    },
-                  },
-                }}
-              >
-                <div className="relative h-40 overflow-hidden">
-                  <img
-                    src={auction.image}
-                    alt={auction.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute top-3 right-3 bg-gradient-to-r from-red-500 to-amber-500 text-white text-xs font-bold px-2 py-1 rounded-full shadow-md">
-                    LIVE
-                  </div>
-                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-3">
-                    <h3 className="font-bold text-white">{auction.title}</h3>
-                  </div>
-                </div>
-
+          <div className="relative">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {liveAuctions.map((auction) => (
                 <motion.div
-                  className="p-4"
-                  initial={{ opacity: 0 }}
-                  variants={{
-                    rest: {
-                      opacity: 0,
-                      transition: { duration: 0.2 },
-                    },
-                    hover: {
-                      opacity: 1,
-                      transition: {
-                        duration: 0.3,
-                        delay: 0.2,
-                      },
-                    },
-                  }}
+                  key={auction.id}
+                  whileHover={{ y: -5 }}
+                  className="bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 hover:border-amber-400/30 transition-all duration-300 "
                 >
-                  <div className="flex justify-between items-center my-3">
-                    <div>
-                      <div className="text-amber-400 font-bold text-lg">
-                        ₹{auction.currentBid.toLocaleString()}
+                  <div className="relative">
+                    <div className="absolute top-3 left-3 z-10">
+                      <div className="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full flex items-center">
+                        <div className="w-2 h-2 rounded-full bg-white mr-1 animate-pulse"></div>
+                        LIVE
                       </div>
-                      <div className="text-gray-400 text-xs">Current Bid</div>
                     </div>
-                    <div className="flex items-center text-gray-400 text-sm">
+                    <div className="absolute top-3 right-3 z-10">
+                      <button className="bg-black/50 hover:bg-black/70 p-2 rounded-full transition-colors">
+                        <FiHeart className="text-white" />
+                      </button>
+                    </div>
+                    <img
+                      src={auction.image}
+                      alt={auction.title}
+                      className="w-full h-48 object-cover"
+                    />
+                  </div>
+
+                  <div className="p-4">
+                    <div className="flex justify-between items-start mb-2">
+                      <h3 className="font-bold text-lg truncate">
+                        {auction.title}
+                      </h3>
+                      <span className="text-xs bg-gray-700 px-2 py-1 rounded">
+                        {auction.category}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center text-sm text-gray-400 mb-4">
                       <FiUsers className="mr-1" />
                       <span>{auction.bids} bids</span>
+                      <span className="mx-2">•</span>
+                      <span>{auction.watchers} watching</span>
                     </div>
-                  </div>
 
-                  <div className="flex items-center text-amber-400 text-sm mb-4">
-                    <FiClock className="mr-2" />
-                    <span>
-                      {`${auction.timeLeft.hours}h ${auction.timeLeft.minutes}m ${auction.timeLeft.seconds}s left`}
-                    </span>
-                  </div>
+                    <div className="mb-4">
+                      <div className="text-2xl font-bold text-amber-400">
+                        ₹{auction.currentBid.toLocaleString()}
+                      </div>
+                      <div className="text-xs text-gray-400">Current bid</div>
+                    </div>
 
-                  <Button
-                    variant="contained"
-                    fullWidth
-                    size="small"
-                    sx={{
-                      background: "linear-gradient(to right, #f59e0b, #f97316)",
-                      "&:hover": {
-                        background:
-                          "linear-gradient(to right, #f97316, #ea580c)",
-                        boxShadow: "0 4px 6px rgba(251, 146, 60, 0.3)",
-                      },
-                      fontWeight: "bold",
-                      borderRadius: "8px",
-                      textTransform: "none",
-                      fontSize: "0.75rem",
-                      py: 1,
-                      boxShadow: "0 2px 4px rgba(251, 146, 60, 0.2)",
-                    }}
-                  >
-                    Bid Now
-                  </Button>
+                    <div className="flex items-center justify-between bg-gray-900/50 p-3 rounded-lg mb-4">
+                      <div className="flex items-center">
+                        <FiClock className="text-amber-400 mr-2" />
+                        <span className="text-sm">Time left</span>
+                      </div>
+                      <div className="font-mono font-bold">
+                        {`${formatTime(auction.timeLeft.hours)}:${formatTime(
+                          auction.timeLeft.minutes
+                        )}:${formatTime(auction.timeLeft.seconds)}`}
+                      </div>
+                    </div>
+
+                    <button className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white py-2 rounded-lg font-bold hover:opacity-90 transition-opacity cursor-pointer">
+                      Place Bid
+                    </button>
+                  </div>
                 </motion.div>
-              </motion.div>
-            ))}
+              ))}
+            </div>
           </div>
         </motion.section>
 
         {/* Upcoming auctions section */}
         <motion.section
-          className="mb-16"
-          initial="hidden"
-          animate="show"
-          variants={container}
+          className="mb-16 mt-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4, duration: 0.6 }}
         >
-          <div className="flex justify-between items-center mb-8">
-            <motion.div variants={item} className="relative">
-              <h2 className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
-                Upcoming Auctions
-              </h2>
-              <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500/30 to-blue-500/30 rounded-full"></div>
-            </motion.div>
-            <motion.div variants={item}>
-              <Button
-                endIcon={<FiArrowRight className="text-cyan-400" />}
-                sx={{
-                  color: "white",
-                  "&:hover": {
-                    backgroundColor: "rgba(255,255,255,0.05)",
-                    transform: "translateX(4px)",
-                  },
-                  textTransform: "none",
-                  fontWeight: "medium",
-                  fontSize: "0.875rem",
-                  transition: "transform 0.2s ease",
-                }}
-              >
-                View All
-              </Button>
-            </motion.div>
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold flex items-center">
+              <FaRegClock className="text-blue-400 mr-3" />
+              <span className="bg-gradient-to-r from-blue-400 to-cyan-500 bg-clip-text text-transparent">
+                Upcomings
+              </span>
+            </h2>
+            <button className="flex items-center text-blue-400 hover:text-blue-300 transition-colors cursor-pointer">
+              View All <FiChevronRight className="ml-1" />
+            </button>
           </div>
 
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-            variants={container}
-          >
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {upcomingAuctions.map((auction) => (
               <motion.div
                 key={auction.id}
-                className="bg-gray-800/50 rounded-xl overflow-hidden shadow-lg border border-gray-700"
-                whileHover={{ y: -8, boxShadow: "0 10px 20px rgba(0,0,0,0.2)" }}
-                variants={item}
-                transition={{ type: "spring", stiffness: 300 }}
+                whileHover={{ y: -5 }}
+                className="bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-400/30 transition-all duration-300 "
               >
-                <div className="relative h-48">
+                <div className="relative">
+                  <div className="absolute top-3 right-3 z-10">
+                    <button className="bg-black/50 hover:bg-black/70 p-2 rounded-full transition-colors">
+                      <FiBell className="text-white" />
+                    </button>
+                  </div>
                   <img
                     src={auction.image}
                     alt={auction.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-48 object-cover"
                   />
-                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                    <div className="bg-gray-900/80 text-white px-4 py-2 rounded-full text-sm font-medium border border-gray-700 backdrop-blur-sm">
-                      ⏳ Starts in {auction.startsIn.days}d{" "}
-                      {auction.startsIn.hours}h
-                    </div>
-                  </div>
                 </div>
 
-                <div className="p-5">
-                  <h3 className="font-bold text-lg mb-3 text-white">
-                    {auction.title}
-                  </h3>
+                <div className="p-4">
+                  <div className="flex justify-between items-start mb-2">
+                    <h3 className="font-bold text-lg truncate">
+                      {auction.title}
+                    </h3>
+                    <span className="text-xs bg-gray-700 px-2 py-1 rounded">
+                      {auction.category}
+                    </span>
+                  </div>
 
                   <div className="mb-4">
-                    <div className="text-cyan-400 font-bold text-xl">
+                    <div className="text-xl font-bold text-blue-400">
                       Starting at ₹{auction.startingBid.toLocaleString()}
                     </div>
                   </div>
 
-                  <Button
-                    variant="outlined"
-                    fullWidth
-                    size="small"
-                    startIcon={<FiBell size={14} className="text-cyan-400" />}
-                    sx={{
-                      color: "white",
-                      borderColor: "gray.600",
-                      "&:hover": {
-                        borderColor: "cyan.400",
-                        backgroundColor: "rgba(6, 182, 212, 0.05)",
-                      },
-                      fontWeight: "bold",
-                      borderRadius: "8px",
-                      textTransform: "none",
-                      fontSize: "0.75rem",
-                      py: 1,
-                    }}
-                  >
-                    Notify Me
-                  </Button>
+                  <div className="flex items-center justify-between bg-gray-900/50 p-3 rounded-lg mb-4">
+                    <div className="flex items-center">
+                      <FiClock className="text-blue-400 mr-2" />
+                      <span className="text-sm">Starts in</span>
+                    </div>
+                    <div className="font-mono font-bold">
+                      {`${formatTime(auction.startsIn.hours)}:${formatTime(
+                        auction.startsIn.minutes
+                      )}`}
+                    </div>
+                  </div>
+
+                  <button className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 text-white py-2 rounded-lg font-bold hover:opacity-90 transition-opacity cursor-pointer">
+                    Set Reminder
+                  </button>
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </motion.section>
 
-        {/* CTA section */}
+        {/* Wants to Sell section */}
         <motion.section
           className="bg-gradient-to-r from-gray-800 to-gray-900 rounded-xl p-8 mb-8 text-center border border-gray-700 max-w-4xl mx-auto relative overflow-hidden"
           initial={{ opacity: 0, y: 20 }}

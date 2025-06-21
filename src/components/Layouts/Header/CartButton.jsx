@@ -18,8 +18,7 @@ function CartButton({ count, onClick, isMobile }) {
         color: "white",
         fontWeight: "600", // font-semibold
         fontSize: "0.875rem", // text-sm
-        cursor: "pointer",
-         
+        cursor: "pointer", 
         display: "flex",
         alignItems: "center",
         gap: "0.5rem", // gap-2
@@ -30,11 +29,9 @@ function CartButton({ count, onClick, isMobile }) {
       aria-label="Open Cart"
       onMouseEnter={(e) => {
         e.currentTarget.style.transform = "scale(1.05)";
-       
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.transform = "scale(1)";
-       
       }}
     >
       <FiShoppingCart size={20} />
