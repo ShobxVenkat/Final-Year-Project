@@ -2,9 +2,9 @@ import TextSlider from "@/components/shop/TextSlider"
 import CategoryGrid from "@/components/shop/CategoryGrid"
 import ProductCarousel from "@/components/shop/ProductCarousel"
 import CallToAction from "@/components/shop/CallToAction"
-import HotDealsSection from "./HotDealsSection"
+import HotDealsSection from "@/components/shop/HotDealsSection"
 import CarouselBanner from "@/components/shop/CarouselBanner"
-import NewArrivals from "./NewArrivals"
+import NewArrivals from "@/components/shop/NewArrivals"
 
 const ShopHome = () => {
   const electronics = [

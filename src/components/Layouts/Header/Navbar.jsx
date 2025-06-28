@@ -1,73 +1,22 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { BiMenuAltRight } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
-import { FiChevronDown } from "react-icons/fi";
-import {
-  FaTshirt,
-  FaMobileAlt,
-  FaLaptop,
-  FaHome,
-  FaBookOpen,
-  FaFire,
-} from "react-icons/fa";
+import { FaFire, FaShoppingCart } from "react-icons/fa";
 import MobileMenu from "./MobileMenu";
 
 const NavLinks = [
   { name: "Home", path: "/" },
   { name: "Auctions", path: "/auctions" },
   { name: "Shop", path: "/shop" },
-  
-    {
-      name: "Categories",
-      path: "/categories",
-      dropdown: [
-        {
-          icon: <FaTshirt className="text-orange-500 text-xl" />,
-          title: "Fashion & Apparel",
-          subtitle: "Clothing, shoes, accessories",
-          href: "/category/fashion-apparel",
-        },
-        {
-          icon: <FaMobileAlt className="text-orange-500 text-xl" />,
-          title: "Electronics",
-          subtitle: "Phones, tablets, gadgets",
-          href: "/category/electronics",
-        },
-        {
-          icon: <FaLaptop className="text-orange-500 text-xl" />,
-          title: "Computers",
-          subtitle: "Laptops, components, peripherals",
-          href: "/category/computers",
-        },
-        {
-          icon: <FaHome className="text-orange-500 text-xl" />,
-          title: "Home & Garden",
-          subtitle: "Furniture, decor, appliances",
-          href: "/category/home-garden",
-        },
-        {
-          icon: <FaBookOpen className="text-orange-500 text-xl" />,
-          title: "Collectibles",
-          subtitle: "Art, antiques, rare items",
-          href: "/category/collectibles",
-        },
-      ],
-    }
-    
 ];
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [openDropdownIndex, setOpenDropdownIndex] = useState(null);
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-  const toggleDropdown = (index) => {
-    setOpenDropdownIndex(openDropdownIndex === index ? null : index);
-  };
   const closeAll = () => {
-    setOpenDropdownIndex(null);
     setIsMobileMenuOpen(false);
   };
 
@@ -87,86 +36,30 @@ export default function Navbar() {
               </motion.div>
             </Link>
 
-            {/* Desktop Navigation with Login Button */}
+            {/* Desktop Navigation  */}
             <div className="flex items-center space-x-6 md:mr-15">
               <ul className="hidden lg:flex space-x-2 ">
-                {NavLinks.map((link, index) => (
-                  <li
-                    key={link.name}
-                    className="relative group"
-                    onMouseEnter={() =>
-                      link.dropdown && setOpenDropdownIndex(index)
-                    }
-                    onMouseLeave={() =>
-                      link.dropdown && setOpenDropdownIndex(null)
-                    }
-                  >
-                    {link.dropdown ? (
-                      <>
-                        <button
-                          onClick={() => toggleDropdown(index)}
-                          className="relative px-3 py-2 text-gray-300 hover:text-white transition-colors group"
-                        >
-                          <div className="flex items-center">
-                            {link.name}
-                            
-                          </div>
-                          <span
-                            className={`absolute left-3 -bottom-1 h-[2px] w-0 bg-orange-500 group-hover:w-[calc(100%-1.5rem)] ${
-                              openDropdownIndex === index
-                                ? "w-[calc(100%-1.5rem)]"
-                                : ""
-                            } transition-all duration-300 ease-in `}
-                          ></span>
-                        </button>
-                        <AnimatePresence>
-                          {openDropdownIndex === index && (
-                            <motion.div
-                              initial={{ opacity: 0, y: 15 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              exit={{ opacity: 0, y: 15 }}
-                              transition={{ duration: 0.2 }}
-                              className="absolute left-1/2 transform -translate-x-1/2 w-80 bg-gray-900 border border-gray-700 p-4 rounded-lg shadow-xl z-50 mt-1"
-                            >
-                              <ul className="space-y-3">
-                                {link.dropdown.map((subItem, subIndex) => (
-                                  <li key={subIndex} className="text-left group">
-                                    <Link
-                                      to={subItem.href}
-                                      className="flex items-start p-3 rounded-md transition-all duration-200 hover:bg-gray-800"
-                                      onClick={closeAll}
-                                    >
-                                      <div className="mr-4 mt-1">
-                                        {subItem.icon}
-                                      </div>
-                                      <div>
-                                        <h4 className="text-white font-medium">
-                                          {subItem.title}
-                                        </h4>
-                                        <p className="text-sm text-gray-400 mt-1">
-                                          {subItem.subtitle}
-                                        </p>
-                                      </div>
-                                    </Link>
-                                  </li>
-                                ))}
-                              </ul>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                      </>
-                    ) : (
-                      <Link
-                        to={link.path}
-                        className="relative px-3 py-2 text-gray-300 hover:text-white transition-colors block group"
-                      >
-                        {link.name}
-                        <span className="absolute left-3 -bottom-1 h-[2px] w-0 bg-orange-500 group-hover:w-[calc(100%-1.5rem)] transition-all duration-300 ease-in"></span>
-                      </Link>
-                    )}
+                {NavLinks.map((link) => (
+                  <li key={link.name}>
+                    <Link
+                      to={link.path}
+                      className="relative px-3 py-2 text-gray-300 hover:text-white transition-colors block group"
+                    >
+                      {link.name}
+                      <span className="absolute left-3 -bottom-1 h-[2px] w-0 bg-orange-500 group-hover:w-[calc(100%-1.5rem)] transition-all duration-300 ease-in"></span>
+                    </Link>
                   </li>
                 ))}
               </ul>
+
+              {/* Cart Button */}
+              <Link
+                to="/cart"
+                className="hidden lg:flex items-center space-x-2 bg-gray-800 hover:bg-gray-700 text-white font-medium rounded-full px-4 py-2 shadow-lg transition-all"
+              >
+                <FaShoppingCart className="text-orange-500" />
+                <span>Cart</span>
+              </Link>
 
               {/* Desktop Login Button */}
               <Link
