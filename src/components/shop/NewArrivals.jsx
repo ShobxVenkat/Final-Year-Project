@@ -71,9 +71,9 @@ const NewArrivals = () => {
     <section className="py-10 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div 
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          // initial={{ opacity: 0, y: -20 }}
+          // animate={{ opacity: 1, y: 0 }}
+          // transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -84,7 +84,7 @@ const NewArrivals = () => {
         </motion.div>
 
         <motion.div
-          variants={container}
+          // variants={container}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true, margin: "-100px" }}
@@ -93,7 +93,7 @@ const NewArrivals = () => {
           {collections.map((collection) => (
             <motion.div
               key={collection.id}
-              variants={item}
+              // variants={item}
               className="relative h-80 rounded-2xl overflow-hidden group shadow-lg hover:shadow-xl transition-shadow duration-300"
               whileHover={{ 
                 scale: 1.03,

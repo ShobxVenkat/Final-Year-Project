@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ShoppingCart, ShoppingBag, ArrowRight, LogIn } from 'lucide-react';
 
-const Cart = ({ isUser = true }) => {
+const Cart = ({ isUser = false }) => {
   // Sample items
   const cartItems = [
     {
