@@ -28,13 +28,15 @@ const CategoryGrid = () => {
     },
     {
       id: 3,
-      name: "Smartphones",
+      name: "Grocery",
       image:
-        "https://images.unsplash.com/photo-1640936343842-268f9d87e764?q=80&w=1000&auto=format&fit=crop",
-      bgColor: "from-blue-500/20 to-indigo-600/20",
-      accentColor: "bg-blue-500",
-      path: "/shop/smartphones",
+       "https://images.unsplash.com/photo-1534723452862-4c874018d66d?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+
+      bgColor: "from-green-500/20 to-lime-600/20",
+      accentColor: "bg-lime-500",
+      path: "/shop/grocery",
     },
+
     {
       id: 4,
       name: "Wellness & Beauty",

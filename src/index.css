@@ -122,6 +122,6 @@ html, body, #root {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: #0E0F1B; /* Same background as page */
+  background-color: #0E0F1B; 
   overflow-x: hidden;
 }

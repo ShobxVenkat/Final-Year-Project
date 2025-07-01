@@ -11,6 +11,12 @@ import Cart from "./components/Pages/Cart";
 import ScrollToTop from "./components/Extra/ScrollToTop"; 
 import FloatingParciles from "./components/Extra/FloatingParciles";
 import FashionApparel from "./components/CategoryPages/FashionApparel";
+import Electronics from "./components/CategoryPages/Electronics";
+import Grocery from "./components/CategoryPages/Grocery";
+import BeautyAndWellness from "./components/CategoryPages/BeautyAndWellness";
+import HomeAndAppliances from "./components/CategoryPages/HomeAndAppliances";
+import SportsAndFitness from "./components/CategoryPages/SportsAndFitness";
+import LiveAuctions from "./components/Pages/LiveAuctions";
 
 export default function App() {
   return (
@@ -20,12 +26,21 @@ export default function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+
         <Route path="/auctions" element={<Auctions />} />
+        <Route path="/auctions/live" element={<LiveAuctions />} />
+
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
+
+        
         <Route path="/shop" element={<ShopHome />} />
         <Route path= "/shop/fashion" element={<FashionApparel/>} />
-
+        <Route path= "/shop/electronics" element={<Electronics />} />
+        <Route path= "/shop/grocery" element= {<Grocery/>}/>
+        <Route path="/shop/wellness" element={<BeautyAndWellness/>}/>
+        <Route path = "/shop/appliances" element= {<HomeAndAppliances/>} />
+        <Route path = "/shop/sports" element = {<SportsAndFitness/>} />
 
         <Route path="/cart" element={<Cart />} />
       </Routes>
