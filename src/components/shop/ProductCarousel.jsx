@@ -3,8 +3,10 @@ import { useState, useEffect } from "react"
 import { FiChevronRight, FiChevronLeft, FiShoppingCart, FiHeart, FiEye } from "react-icons/fi"
 import { FaStar, FaStarHalfAlt } from "react-icons/fa"
 import { BsArrowRight } from "react-icons/bs"
+import { useNavigate } from "react-router-dom"
 
 const ProductCarousel = ({ title, products, gradientColors }) => {
+  const navigate = useNavigate()
   const [currentIndex, setCurrentIndex] = useState(0)
   const [itemsPerView, setItemsPerView] = useState(4)
 
@@ -81,6 +83,7 @@ const ProductCarousel = ({ title, products, gradientColors }) => {
             </h2>
           </div>
           <motion.button
+            onClick={() => navigate("/shop/electronics")}
             className={`flex items-center ${gradientColors.button} transition-all duration-300 bg-gray-200 px-6 py-3 rounded-full shadow-lg hover:shadow-xl mt-4 sm:mt-0`}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}

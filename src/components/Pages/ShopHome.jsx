@@ -6,6 +6,7 @@ import HotDealsSection from "@/components/shop/HotDealsSection"
 import CarouselBanner from "@/components/shop/CarouselBanner"
 import NewArrivals from "@/components/shop/NewArrivals"
 
+
 const ShopHome = () => {
   const electronics = [
     {

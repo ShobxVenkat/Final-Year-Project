@@ -1,4 +1,3 @@
-"use client";
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -25,7 +24,11 @@ import {
   CalendarClock,
 } from "lucide-react";
 
+import { useNavigate } from "react-router-dom";
+
 export default function Auctions() {
+  const navigate = useNavigate();
+
   // Featured auctions data
   const [featuredAuctions] = useState([
     {
@@ -456,6 +459,7 @@ export default function Auctions() {
               </h2>
             </div>
             <Button
+              onClick={()=>navigate("/auctions/live")}
               variant="ghost"
               className="text-orange-400 hover:text-orange-300 hover:bg-gray-800"
             >
