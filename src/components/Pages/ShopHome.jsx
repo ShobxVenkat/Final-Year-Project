@@ -1,10 +1,11 @@
-import TextSlider from "@/components/shop/TextSlider"
-import CategoryGrid from "@/components/shop/CategoryGrid"
-import ProductCarousel from "@/components/shop/ProductCarousel"
-import CallToAction from "@/components/shop/CallToAction"
-import HotDealsSection from "@/components/shop/HotDealsSection"
-import CarouselBanner from "@/components/shop/CarouselBanner"
-import NewArrivals from "@/components/shop/NewArrivals"
+import CategoryGrid from "../shop/CategoryGrid"
+import TextSlider from "../shop/textSlider"
+import CarouselBanner from "../shop/CarouselBanner"
+import ProductCarousel from "../shop/ProductCarousel"
+import HotDealsSection from "../shop/HotDealsSection"
+import NewArrivals from "../shop/NewArrivals"
+import CallToAction from "../shop/CallToAction"
+
 
 
 const ShopHome = () => {
