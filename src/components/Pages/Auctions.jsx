@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
@@ -459,7 +458,7 @@ export default function Auctions() {
               </h2>
             </div>
             <Button
-              onClick={()=>navigate("/auctions/live")}
+              onClick={() => navigate("/auctions/live")}
               variant="ghost"
               className="text-orange-400 hover:text-orange-300 hover:bg-gray-800"
             >
@@ -667,16 +666,12 @@ export default function Auctions() {
                   your valuable items.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
-                  <Button className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold px-6 py-2 text-sm sm:text-base">
-                    <Plus className="w-4 h-4 mr-2" />
-                    Create Auction
-                  </Button>
                   <Button
-                    variant="outline"
-                    className="border-amber-500 text-amber-400 hover:bg-amber-500/10 px-6 py-2 text-sm sm:text-base bg-transparent"
+                    onClick={() => navigate("/sell")}
+                    className="bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 hover:to-orange-600 text-white font-bold px-6 py-2 text-sm sm:text-base"
                   >
-                    Learn More
-                    <ArrowRight className="w-4 h-4 ml-2" />
+                    <Plus className="w-4 h-4 mr-2" />
+                    Add Your Product
                   </Button>
                 </div>
               </motion.div>

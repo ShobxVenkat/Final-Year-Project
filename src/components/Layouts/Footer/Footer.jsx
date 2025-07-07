@@ -45,11 +45,7 @@ const Footer = () => {
                   <FiChevronRight className="mr-2 text-xs" /> Live Auctions
                 </Link>
               </li>
-              <li>
-                <Link to="/upcoming" className="hover:text-amber-400 transition-colors flex items-center">
-                  <FiChevronRight className="mr-2 text-xs" /> Upcoming Auctions
-                </Link>
-              </li>
+             
               <li>
                 <Link to="/featured" className="hover:text-amber-400 transition-colors flex items-center">
                   <FiChevronRight className="mr-2 text-xs" /> Featured Items
