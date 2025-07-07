@@ -3,10 +3,13 @@ import { motion } from "framer-motion";
 import monitorImg from "../../assets/img.png";
 import { useEffect, useState } from "react";
 
+// Very first few lines in Home.jsx
+import { useNavigate } from "react-router-dom";
 
 
 
 const Home = () => {
+  const navigate = useNavigate(); 
   const [timeLeft, setTimeLeft] = useState({
     hours: 3,
     minutes: 12,
@@ -110,20 +113,22 @@ const Home = () => {
             variants={item}
           >
             <Button
-              variant="contained"
-              sx={{
-                backgroundColor: "#fb923c",
-                "&:hover": { backgroundColor: "#f97316" },
-                paddingX: 3,
-                paddingY: 1.5,
-                fontWeight: "bold",
-                borderRadius: 2,
-                textTransform: "none",
-                width: { xs: "50%", sm: "auto" },
-              }}
-            >
-              Explore Auctions
-            </Button>
+  onClick={() => navigate("/auctions")}
+  variant="contained"
+  sx={{
+    backgroundColor: "#fb923c",
+    "&:hover": { backgroundColor: "#f97316" },
+    paddingX: 3,
+    paddingY: 1.5,
+    fontWeight: "bold",
+    borderRadius: 2,
+    textTransform: "none",
+    width: { xs: "50%", sm: "auto" },
+  }}
+>
+  Explore Auctions
+</Button>
+
             <Button
   variant="outlined"
   sx={{

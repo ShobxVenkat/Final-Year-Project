@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@mui/material";
+import { useNavigate } from "react-router-dom"; // Add this import
 import {
   FiClock,
   FiUsers,
@@ -15,47 +16,69 @@ import { FaFire, FaRegClock } from "react-icons/fa";
 import FeaturedSection from "./FeaturedSection";
 
 const Auctions = () => {
+  const navigate = useNavigate(); // Add navigation hook
+
   // Sample data for live auctions
   const [liveAuctions, setLiveAuctions] = useState([
     {
       id: 1,
       title: "Vintage Rolex Submariner",
+      description: "Authentic vintage Rolex Submariner in excellent condition. Original box and papers included. A rare collector's piece from the 1960s.",
       currentBid: 12500,
       bids: 24,
       image: "https://images.unsplash.com/photo-1523170335258-f5ed11844a49",
       timeLeft: { hours: 1, minutes: 30, seconds: 45 },
       category: "Watches",
       watchers: 56,
+      seller: "WatchCollector123",
+      condition: "Excellent",
+      startingBid: 8000,
+      bidIncrement: 250,
     },
     {
       id: 3,
       title: "Signed Sports Memorabilia",
+      description: "Rare signed basketball jersey from a legendary player. Comes with certificate of authenticity.",
       currentBid: 7800,
       bids: 18,
       image: "https://images.unsplash.com/photo-1579952363872-2898cd6f7c38",
       timeLeft: { hours: 0, minutes: 15, seconds: 10 },
       category: "Collectibles",
       watchers: 42,
+      seller: "SportsCollector",
+      condition: "Mint",
+      startingBid: 5000,
+      bidIncrement: 200,
     },
     {
       id: 4,
       title: "Limited Edition Sneakers",
+      description: "Brand new limited edition sneakers, never worn. Original box and tags included.",
       currentBid: 4200,
       bids: 15,
       image: "https://images.unsplash.com/photo-1600269452121-4f2416e55c28",
       timeLeft: { hours: 0, minutes: 25, seconds: 30 },
       category: "Footwear",
       watchers: 38,
+      seller: "SneakerHead",
+      condition: "New",
+      startingBid: 2500,
+      bidIncrement: 100,
     },
     {
       id: 5,
       title: "Antique Jewelry Collection",
+      description: "Beautiful antique jewelry collection from the Victorian era. Includes necklace, earrings, and bracelet.",
       currentBid: 6800,
       bids: 22,
       image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e",
       timeLeft: { hours: 0, minutes: 10, seconds: 5 },
       category: "Jewelry",
       watchers: 71,
+      seller: "AntiqueDealer",
+      condition: "Very Good",
+      startingBid: 4000,
+      bidIncrement: 150,
     },
   ]);
 
@@ -64,36 +87,75 @@ const Auctions = () => {
     {
       id: 7,
       title: "Collector's Art Piece",
+      description: "Original artwork by a renowned contemporary artist. Perfect for art collectors.",
       startingBid: 2500,
       image: "https://images.unsplash.com/photo-1534447677768-be436bb09401",
       startsIn: { days: 0, hours: 2, minutes: 30 },
       category: "Art",
+      seller: "ArtGallery",
+      condition: "Excellent",
+      bidIncrement: 100,
     },
     {
       id: 8,
       title: "Designer Handbag",
+      description: "Authentic designer handbag in pristine condition. Comes with authenticity certificate.",
       startingBid: 1800,
       image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea",
       startsIn: { days: 0, hours: 1, minutes: 45 },
       category: "Fashion",
+      seller: "LuxuryItems",
+      condition: "Like New",
+      bidIncrement: 75,
     },
     {
       id: 9,
       title: "Vintage Vinyl Collection",
+      description: "Rare vinyl records collection from the 70s and 80s. All in excellent playing condition.",
       startingBid: 950,
       image: "https://images.unsplash.com/photo-1572635148818-ef6fd45eb394",
       startsIn: { days: 0, hours: 3, minutes: 15 },
       category: "Music",
+      seller: "VinylCollector",
+      condition: "Very Good",
+      bidIncrement: 50,
     },
     {
       id: 10,
       title: "Rare Whiskey Collection",
+      description: "Premium aged whiskey collection. Perfect for connoisseurs and collectors.",
       startingBid: 3500,
       image: "https://images.unsplash.com/photo-1600788886242-5c96aabe3757",
       startsIn: { days: 0, hours: 4, minutes: 0 },
       category: "Spirits",
+      seller: "WhiskeyExpert",
+      condition: "Sealed",
+      bidIncrement: 200,
     },
   ]);
+
+  // Function to handle navigation to live bidding page
+  const handleProductClick = (auction) => {
+    // Convert timeLeft to endTime for LiveBidding component
+    const now = new Date();
+    const endTime = new Date(
+      now.getTime() + 
+      (auction.timeLeft.hours * 60 * 60 * 1000) +
+      (auction.timeLeft.minutes * 60 * 1000) +
+      (auction.timeLeft.seconds * 1000)
+    );
+
+    const productData = {
+      ...auction,
+      endTime: endTime,
+      views: Math.floor(Math.random() * 2000) + 500, // Random views for demo
+    };
+
+    // Navigate to live bidding page with product data
+    navigate(`/live-bidding/${auction.id}`, { 
+      state: { product: productData } 
+    });
+  };
 
   // Update timers
   useEffect(() => {
@@ -194,7 +256,8 @@ const Auctions = () => {
                 <motion.div
                   key={auction.id}
                   whileHover={{ y: -5 }}
-                  className="bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 hover:border-amber-400/30 transition-all duration-300 "
+                  className="bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 hover:border-amber-400/30 transition-all duration-300 cursor-pointer"
+                  onClick={() => handleProductClick(auction)} // Add click handler
                 >
                   <div className="relative">
                     <div className="absolute top-3 left-3 z-10">
@@ -204,12 +267,15 @@ const Auctions = () => {
                       </div>
                     </div>
                     <div className="absolute top-3 right-3 z-10">
-                      <button className="bg-black/50 hover:bg-black/70 p-2 rounded-full transition-colors">
+                      <button 
+                        className="bg-black/50 hover:bg-black/70 p-2 rounded-full transition-colors"
+                        onClick={(e) => e.stopPropagation()} // Prevent card click when clicking heart
+                      >
                         <FiHeart className="text-white" />
                       </button>
                     </div>
                     <img
-                      src={auction.image}
+                      src={auction.image || "/placeholder.svg"}
                       alt={auction.title}
                       className="w-full h-48 object-cover"
                     />
@@ -217,9 +283,7 @@ const Auctions = () => {
 
                   <div className="p-4">
                     <div className="flex justify-between items-start mb-2">
-                      <h3 className="font-bold text-lg truncate">
-                        {auction.title}
-                      </h3>
+                      <h3 className="font-bold text-lg truncate">{auction.title}</h3>
                       <span className="text-xs bg-gray-700 px-2 py-1 rounded">
                         {auction.category}
                       </span>
@@ -251,7 +315,13 @@ const Auctions = () => {
                       </div>
                     </div>
 
-                    <button className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white py-2 rounded-lg font-bold hover:opacity-90 transition-opacity cursor-pointer">
+                    <button 
+                      className="w-full bg-gradient-to-r from-amber-500 to-orange-500 text-white py-2 rounded-lg font-bold hover:opacity-90 transition-opacity cursor-pointer"
+                      onClick={(e) => {
+                        e.stopPropagation(); // Prevent card click
+                        handleProductClick(auction); // Navigate to bidding page
+                      }}
+                    >
                       Place Bid
                     </button>
                   </div>
@@ -285,16 +355,24 @@ const Auctions = () => {
               <motion.div
                 key={auction.id}
                 whileHover={{ y: -5 }}
-                className="bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-400/30 transition-all duration-300 "
+                className="bg-gray-800/50 rounded-xl overflow-hidden border border-gray-700 hover:border-blue-400/30 transition-all duration-300 cursor-pointer"
+                onClick={() => {
+                  // For upcoming auctions, you might want different behavior
+                  // For now, let's show an alert or navigate to a "coming soon" page
+                  alert(`This auction starts in ${formatTime(auction.startsIn.hours)}:${formatTime(auction.startsIn.minutes)}`);
+                }}
               >
                 <div className="relative">
                   <div className="absolute top-3 right-3 z-10">
-                    <button className="bg-black/50 hover:bg-black/70 p-2 rounded-full transition-colors">
+                    <button 
+                      className="bg-black/50 hover:bg-black/70 p-2 rounded-full transition-colors"
+                      onClick={(e) => e.stopPropagation()}
+                    >
                       <FiBell className="text-white" />
                     </button>
                   </div>
                   <img
-                    src={auction.image}
+                    src={auction.image || "/placeholder.svg"}
                     alt={auction.title}
                     className="w-full h-48 object-cover"
                   />
@@ -302,9 +380,7 @@ const Auctions = () => {
 
                 <div className="p-4">
                   <div className="flex justify-between items-start mb-2">
-                    <h3 className="font-bold text-lg truncate">
-                      {auction.title}
-                    </h3>
+                    <h3 className="font-bold text-lg truncate">{auction.title}</h3>
                     <span className="text-xs bg-gray-700 px-2 py-1 rounded">
                       {auction.category}
                     </span>
@@ -346,7 +422,6 @@ const Auctions = () => {
         >
           <div className="absolute -right-20 -top-20 w-40 h-40 bg-amber-500/10 rounded-full filter blur-xl"></div>
           <div className="absolute -left-20 -bottom-20 w-40 h-40 bg-cyan-500/10 rounded-full filter blur-xl"></div>
-
           <h2 className="text-2xl font-bold mb-3 bg-gradient-to-r from-amber-300 to-orange-400 bg-clip-text text-transparent">
             Want to sell your items?
           </h2>
